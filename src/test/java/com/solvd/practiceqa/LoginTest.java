@@ -1,9 +1,11 @@
 package com.solvd.practiceqa;
 
+import com.solvd.practiceqa.web.pages.AbstractPage;
 import com.solvd.practiceqa.web.pages.AccountPage;
+import com.solvd.practiceqa.web.service.ConfigData;
 import com.solvd.practiceqa.web.service.ConfigService;
+import com.solvd.practiceqa.web.service.DriverService;
 import com.solvd.practiceqa.web.service.LoginService;
-import com.solvd.practiceqa.web.service.PageService;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -13,20 +15,19 @@ import org.testng.annotations.Test;
 public class LoginTest {
 
     private static WebDriver driver;
-    private static PageService pageService;
+    private static LoginService loginService;
 
     @BeforeTest public void before() {
-        new LoginService();
         new ConfigService();
-        driver = PageService.driverInit();
-        pageService = new PageService(driver);
+        driver = DriverService.driverInit();
+        loginService = new LoginService(driver);
     }
 
     @Test public void loginTest() {
-        String email = LoginService.EMAIL;
-        String pass = LoginService.PASSWORD;
-        AccountPage accountPage = pageService.login(email, pass);
-        pageService.sleep(5);
+        String email = ConfigService.getValue("email");
+        String pass = ConfigService.getValue("password");
+        AccountPage accountPage = loginService.login(email, pass);
+        AbstractPage.sleep(5);
         Assert.assertTrue(accountPage.getTitle().isDisplayed(), "Account page is not opened");
     }
 

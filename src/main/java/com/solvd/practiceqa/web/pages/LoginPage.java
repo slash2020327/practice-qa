@@ -1,6 +1,6 @@
 package com.solvd.practiceqa.web.pages;
 
-import com.solvd.practiceqa.web.AbstractPage;
+import com.solvd.practiceqa.web.service.ConfigData;
 import com.solvd.practiceqa.web.service.ConfigService;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +19,7 @@ public class LoginPage extends AbstractPage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
-        String pageUrl = ConfigService.BASE_URL + "/account-login";
+        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL) + "/account-login";
         setUrl(pageUrl);
     }
 

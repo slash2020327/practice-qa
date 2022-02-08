@@ -6,24 +6,54 @@ import org.slf4j.LoggerFactory;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 public class ConfigService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-    public static String BASE_URL;
-    public static String BROWSER;
+    private static Map<String, String> configData;
 
     public ConfigService() {
+        configData = new HashMap<>();
         FileInputStream fis;
         Properties property = new Properties();
         try {
             fis = new FileInputStream("src/main/resources/config.properties");
             property.load(fis);
+            Set<String> configPropertyNames = property.stringPropertyNames();
+            configPropertyNames
+                    .forEach(name -> configData.put(name, property.getProperty(name)));
+
+            fis = new FileInputStream("src/test/resources/login.properties");
+            property.load(fis);
+            Set<String> loginPropertyNames = property.stringPropertyNames();
+            loginPropertyNames
+                    .forEach(name -> configData.put(name, property.getProperty(name)));
         } catch (IOException e) {
             LOGGER.warn("Property file can't be read");
         }
-        BASE_URL = property.getProperty("base_url");
-        BROWSER = property.getProperty("browser");
+    }
+
+    public static String getValue(ConfigData property) {
+        String value = null;
+        for(String key : configData.keySet()) {
+            if(key.equals(property.getTitle())){
+                value = configData.get(key);
+            }
+        }
+        return value;
+    }
+
+    public static String getValue(String property) {
+        String value = null;
+        for(String key : configData.keySet()) {
+            if(key.equals(property)){
+                value = configData.get(key);
+            }
+        }
+        return value;
     }
 }
