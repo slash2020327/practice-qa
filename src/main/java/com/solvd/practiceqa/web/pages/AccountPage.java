@@ -1,16 +1,14 @@
 package com.solvd.practiceqa.web.pages;
 
+import com.solvd.practiceqa.web.AbstractPage;
+import com.solvd.practiceqa.web.service.ConfigService;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.devtools.v97.page.Page;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class AccountPage extends Page {
-
-    private static final String URL = "https://www.adidas.com/us/my-account";
+public class AccountPage extends AbstractPage {
 
     @FindBy(xpath = "//h1[contains(@class, heading)]")
     private WebElement title;
@@ -19,7 +17,9 @@ public class AccountPage extends Page {
     private List<WebElement> accountLinks;
 
     public AccountPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+        super(driver);
+        String pageUrl = ConfigService.BASE_URL + "/my-account";
+        setUrl(pageUrl);
     }
 
     public WebElement getTitle() {

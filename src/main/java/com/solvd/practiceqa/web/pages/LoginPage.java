@@ -1,16 +1,12 @@
 package com.solvd.practiceqa.web.pages;
 
-import org.openqa.selenium.Keys;
+import com.solvd.practiceqa.web.AbstractPage;
+import com.solvd.practiceqa.web.service.ConfigService;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.devtools.v97.page.Page;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends Page {
-
-    private final WebDriver driver;
-    private static final String URL = "https://www.adidas.com/us/account-login";
+public class LoginPage extends AbstractPage {
 
     @FindBy(xpath = "//input[@id='login-email']")
     private WebElement emailField;
@@ -22,9 +18,9 @@ public class LoginPage extends Page {
     private WebElement loginButton;
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        driver.get(URL);
-        PageFactory.initElements(driver, this);
+        super(driver);
+        String pageUrl = ConfigService.BASE_URL + "/account-login";
+        setUrl(pageUrl);
     }
 
     public WebElement getEmailField() {
@@ -45,14 +41,5 @@ public class LoginPage extends Page {
 
     public void printPassword(String pass) {
         passwordField.sendKeys(pass);
-        passwordField.click();
-        passwordField.sendKeys(Keys.ENTER);
-    }
-
-    public AccountPage login(String email, String pass) {
-        printEmail(email);
-        printPassword(pass);
-        loginButton.click();
-        return new AccountPage(driver);
     }
 }

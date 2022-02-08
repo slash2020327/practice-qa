@@ -1,4 +1,4 @@
-package com.solvd.practiceqa.web.pages;
+package com.solvd.practiceqa.web.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,13 +8,13 @@ import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.util.Properties;
 
-public class Config {
+public class ConfigService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     public static String BASE_URL;
     public static String BROWSER;
 
-    public Config() {
+    public ConfigService() {
         FileInputStream fis;
         Properties property = new Properties();
         try {
