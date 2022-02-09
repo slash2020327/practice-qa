@@ -2,7 +2,6 @@ package com.solvd.practiceqa;
 
 import com.solvd.practiceqa.web.pages.AbstractPage;
 import com.solvd.practiceqa.web.pages.AccountPage;
-import com.solvd.practiceqa.web.service.ConfigData;
 import com.solvd.practiceqa.web.service.ConfigService;
 import com.solvd.practiceqa.web.service.DriverService;
 import com.solvd.practiceqa.web.service.LoginService;

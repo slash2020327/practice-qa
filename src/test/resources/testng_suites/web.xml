@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="TA practice" parallel="classes">
+    <test name="Adidas Test">
+        <classes>
+            <class name="com.solvd.practiceqa.LoginTest"/>
+            <class name="com.solvd.practiceqa.SearchingProductTest"/>
+        </classes>
+    </test>
+</suite>

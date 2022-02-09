@@ -25,6 +25,8 @@ public class DriverService {
         default:
             LOGGER.warn("Browser is not defined");
         }
+        assert driver != null;
+        driver.manage().window().maximize();
         return driver;
     }
 }
