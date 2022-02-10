@@ -40,6 +40,7 @@ public abstract class AbstractPage extends Page {
 
     public void open() {
         driver.get(url);
+        sleep(3);
     }
 
     protected void setUrl(String url) {

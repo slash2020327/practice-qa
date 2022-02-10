@@ -4,6 +4,7 @@
         <classes>
             <class name="com.solvd.practiceqa.LoginTest"/>
             <class name="com.solvd.practiceqa.SearchingProductTest"/>
+            <class name="com.solvd.practiceqa.ShoppingCartTest"/>
         </classes>
     </test>
 </suite>
