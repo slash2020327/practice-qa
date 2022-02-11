@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class ShoppingCartPage extends AbstractPage{
+public class ShoppingCartPage extends AbstractPage {
 
     @FindBy(xpath = "//h3[text()='Your Bag']")
     WebElement title;

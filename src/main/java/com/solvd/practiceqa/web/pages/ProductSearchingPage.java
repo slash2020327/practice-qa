@@ -2,15 +2,18 @@ package com.solvd.practiceqa.web.pages;
 
 import com.solvd.practiceqa.web.service.ConfigData;
 import com.solvd.practiceqa.web.service.ConfigService;
+import com.solvd.practiceqa.web.util.WaitUtil;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class ProductSearchingPage extends AbstractPage{
+public class ProductSearchingPage extends AbstractPage {
 
-    @FindBy(xpath = "//div[contains(@class,'secondary-controllers')]//div[contains(@class,'sortby_wrapper')]//button[contains(@class,'dropdown-select')]")
+    @FindBy(xpath = "//div[contains(@class,'controllers')]//button[contains(@class,'select')]//span[contains(@class,'text')]")
     private WebElement sortButton;
 
     @FindBy(xpath = "//div[contains(@class,'secondary-controllers')]//div[contains(@class,'sortby_wrapper')]//div[contains(@class,'options')]//li/button")
@@ -28,16 +31,46 @@ public class ProductSearchingPage extends AbstractPage{
         setUrl(pageUrl);
     }
 
-    public void sortButtonClick() {
-        sortButton.click();
-    }
-
     public void chooseOption(String title) {
         WebElement option = sortingOptions.stream()
                 .filter(webElement -> webElement.getText().equals(title))
                 .findFirst()
                 .get();
-        option.click();
+        click(option);
+    }
+
+    public List<WebElement> sortSearch() {
+        open();
+        click(sortButton);
+        String sortOption = ConfigService.getValue("sorting_option");
+        chooseOption(sortOption);
+        WaitUtil.sleep(5);
+        return getProductPrice();
+    }
+
+    public List<Integer> getResultPrices() {
+        List<WebElement> prices = sortSearch();
+        return prices.stream()
+                .map(WebElement::getText)
+                .map(text -> text.substring(1).replaceAll("[,]", ""))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getResultTitles() {
+        List<WebElement> titles = getProductTitles();
+        return titles.stream()
+                .map(WebElement::getText)
+                .map(String::toLowerCase)
+                .collect(Collectors.toList());
+    }
+
+    public void searchInput(String text) {
+        HomePage homePage = new HomePage(driver);
+        homePage.open();
+        WebElement searchField = homePage.getSearchField();
+        searchField.sendKeys(text);
+        searchField.sendKeys(Keys.ENTER);
     }
 
     public WebElement getSortButton() {

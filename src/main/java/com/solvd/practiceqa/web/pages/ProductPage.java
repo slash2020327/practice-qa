@@ -29,19 +29,12 @@ public class ProductPage extends AbstractPage{
     }
 
     public void chooseSize(String size) {
-        WebElement chosenSize = null;
+        WebElement chosenSize;
         chosenSize = sizeGrid.stream()
                 .filter(item -> size.equals(item.getText()))
                 .findFirst()
                 .get();
-        if(chosenSize != null) {
-            chosenSize.click();
-        }
-        else throw new RuntimeException("There is no such size");
-    }
-
-    public void clickAddToBAgButton() {
-        addToBagButton.click();
+        click(chosenSize);
     }
 
     public List<WebElement> getSizeGrid() {

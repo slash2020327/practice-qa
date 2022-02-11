@@ -23,14 +23,6 @@ public class LoginPage extends AbstractPage {
         setUrl(pageUrl);
     }
 
-    public void printEmail(String email) {
-        emailField.sendKeys(email);
-    }
-
-    public void printPassword(String pass) {
-        passwordField.sendKeys(pass);
-    }
-
     public WebElement getEmailField() {
         return emailField;
     }

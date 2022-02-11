@@ -1,8 +1,8 @@
 package com.solvd.practiceqa.web.service;
 
-import com.solvd.practiceqa.web.pages.AbstractPage;
 import com.solvd.practiceqa.web.pages.ProductPage;
 import com.solvd.practiceqa.web.pages.ShoppingCartPage;
+import com.solvd.practiceqa.web.util.WaitUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -18,24 +18,24 @@ public class ProductPageService {
         shoppingCartPage = new ShoppingCartPage(driver);
     }
 
-    public String getProductTitle() {
+    public String getProductTitleText() {
         return productPage.getTitle().getText();
     }
 
-    public void productPageOpen() {
+    public void openProductPage() {
         productPage.open();
     }
 
-    public void cartPageOpen() {
+    public void openCartPage() {
         shoppingCartPage.open();
     }
 
     public ShoppingCartPage addProductToBag() {
-        productPage.chooseSize("8");
-        productPage.clickAddToBAgButton();
-        AbstractPage.sleep(3);
-        productPage.getPopupCloseButton().click();
-        productPage.goToBag();
+        productPage.chooseSize(ConfigService.getValue("size"));
+        productPage.click(productPage.getAddToBagButton());
+        WaitUtil.sleep(3);
+        productPage.click(productPage.getPopupCloseButton());
+        productPage.click(productPage.getBagButton());
         return shoppingCartPage;
     }
 

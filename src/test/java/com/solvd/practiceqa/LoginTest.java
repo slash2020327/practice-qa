@@ -1,24 +1,19 @@
 package com.solvd.practiceqa;
 
-import com.solvd.practiceqa.web.pages.AbstractPage;
 import com.solvd.practiceqa.web.pages.AccountPage;
 import com.solvd.practiceqa.web.service.ConfigService;
-import com.solvd.practiceqa.web.service.DriverService;
 import com.solvd.practiceqa.web.service.LoginService;
-import org.openqa.selenium.WebDriver;
+import com.solvd.practiceqa.web.util.WaitUtil;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class LoginTest {
+public class LoginTest extends AbstractTest {
 
-    private static WebDriver driver;
     private static LoginService loginService;
 
-    @BeforeTest public void before() {
-        new ConfigService();
-        driver = DriverService.driverInit();
+    @BeforeClass
+    public void before() {
         loginService = new LoginService(driver);
     }
 
@@ -26,11 +21,7 @@ public class LoginTest {
         String email = ConfigService.getValue("email");
         String pass = ConfigService.getValue("password");
         AccountPage accountPage = loginService.login(email, pass);
-        AbstractPage.sleep(5);
+        WaitUtil.waitVisibility(driver, accountPage.getTitle());
         Assert.assertTrue(accountPage.getTitle().isDisplayed(), "Account page is not opened");
-    }
-
-    @AfterTest public void after() {
-        driver.quit();
     }
 }

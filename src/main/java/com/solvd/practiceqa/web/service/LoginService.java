@@ -1,8 +1,8 @@
 package com.solvd.practiceqa.web.service;
 
-import com.solvd.practiceqa.web.pages.AbstractPage;
 import com.solvd.practiceqa.web.pages.AccountPage;
 import com.solvd.practiceqa.web.pages.LoginPage;
+import com.solvd.practiceqa.web.util.WaitUtil;
 import org.openqa.selenium.WebDriver;
 
 public class LoginService {
@@ -17,10 +17,10 @@ public class LoginService {
 
     public AccountPage login(String email, String pass) {
         loginPage.open();
-        AbstractPage.sleep(4);
-        loginPage.printEmail(email);
-        loginPage.printPassword(pass);
-        loginPage.getLoginButton().click();
+        WaitUtil.sleep(4);
+        loginPage.insert(loginPage.getEmailField(), email);
+        loginPage.insert(loginPage.getPasswordField(), pass);
+        loginPage.click(loginPage.getLoginButton());
         return accountPage;
     }
 }
