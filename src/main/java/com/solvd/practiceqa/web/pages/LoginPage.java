@@ -23,6 +23,12 @@ public class LoginPage extends AbstractPage {
         setUrl(pageUrl);
     }
 
+    public LoginPage(WebDriver driver, String path) {
+        super(driver);
+        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL);
+        setUrl(pageUrl + path);
+    }
+
     public WebElement getEmailField() {
         return emailField;
     }
@@ -33,13 +39,5 @@ public class LoginPage extends AbstractPage {
 
     public WebElement getLoginButton() {
         return loginButton;
-    }
-
-    public void printEmail(String email) {
-        emailField.sendKeys(email);
-    }
-
-    public void printPassword(String pass) {
-        passwordField.sendKeys(pass);
     }
 }

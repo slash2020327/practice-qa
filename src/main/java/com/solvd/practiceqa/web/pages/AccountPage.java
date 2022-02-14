@@ -22,6 +22,12 @@ public class AccountPage extends AbstractPage {
         setUrl(pageUrl);
     }
 
+    public AccountPage(WebDriver driver, String path) {
+        super(driver);
+        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL);
+        setUrl(pageUrl + path);
+    }
+
     public WebElement getTitle() {
         return title;
     }
