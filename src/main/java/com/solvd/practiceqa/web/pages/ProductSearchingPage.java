@@ -2,8 +2,8 @@ package com.solvd.practiceqa.web.pages;
 
 import com.solvd.practiceqa.web.service.ConfigData;
 import com.solvd.practiceqa.web.service.ConfigService;
+import com.solvd.practiceqa.web.service.TestDataService;
 import com.solvd.practiceqa.web.util.WaitUtil;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,10 +16,10 @@ public class ProductSearchingPage extends AbstractPage {
     @FindBy(xpath = "//div[contains(@class,'controllers')]//button[contains(@class,'select')]//span[contains(@class,'text')]")
     private WebElement sortButton;
 
-    @FindBy(xpath = "//div[contains(@class,'secondary-controllers')]//div[contains(@class,'sortby_wrapper')]//div[contains(@class,'options')]//li/button")
+    @FindBy(xpath = "//div[contains(@class,'sortby')]//div[contains(@class,'options')]//button")
     private List<WebElement> sortingOptions;
 
-    @FindBy(xpath = "//div[contains(@class,'product-container')]//div[contains(@class,'grid-item')]//div[contains(@class, 'gl-price--')]/div[1]")
+        @FindBy(xpath = "//div[contains(@class,'grid-item')]//div[contains(@class, 'price')]/div[1]")
     private List<WebElement> productPrice;
 
     @FindBy(xpath = "//p[contains(@class,'product-card') and contains(@class,'title')]")
@@ -27,8 +27,12 @@ public class ProductSearchingPage extends AbstractPage {
 
     public ProductSearchingPage(WebDriver driver) {
         super(driver);
-        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL) + "/women-new_arrivals";
-        setUrl(pageUrl);
+    }
+
+    public ProductSearchingPage(WebDriver driver, String path) {
+        super(driver);
+        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL);
+        setUrl(pageUrl + path);
     }
 
     public void chooseOption(String title) {
@@ -42,7 +46,7 @@ public class ProductSearchingPage extends AbstractPage {
     public List<WebElement> sortSearch() {
         open();
         click(sortButton);
-        String sortOption = ConfigService.getValue("sorting_option");
+        String sortOption = TestDataService.getValue("sorting_option");
         chooseOption(sortOption);
         WaitUtil.sleep(5);
         return getProductPrice();
@@ -69,8 +73,7 @@ public class ProductSearchingPage extends AbstractPage {
         HomePage homePage = new HomePage(driver);
         homePage.open();
         WebElement searchField = homePage.getSearchField();
-        searchField.sendKeys(text);
-        searchField.sendKeys(Keys.ENTER);
+        insert(searchField, text);
     }
 
     public WebElement getSortButton() {

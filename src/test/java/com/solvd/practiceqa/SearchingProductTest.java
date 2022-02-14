@@ -1,6 +1,7 @@
 package com.solvd.practiceqa;
 
 import com.solvd.practiceqa.web.pages.ProductSearchingPage;
+import com.solvd.practiceqa.web.service.TestDataService;
 import com.solvd.practiceqa.web.util.WaitUtil;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -16,7 +17,8 @@ public class SearchingProductTest extends AbstractTest {
 
     @BeforeClass
     public void beforeSearching() {
-        productSearchingPage = new ProductSearchingPage(driver);
+        String searchEnd = TestDataService.getValue("search_end");
+        productSearchingPage = new ProductSearchingPage(driver, searchEnd);
     }
 
     @Test
@@ -36,7 +38,7 @@ public class SearchingProductTest extends AbstractTest {
     @Test(dataProvider = "searchDataProvider")
     public void searchTest(String searchText) {
         productSearchingPage.searchInput(searchText);
-        WaitUtil.sleep(8);
+        WaitUtil.sleep(5);
         List<String> resultTitles = productSearchingPage.getResultTitles();
         SoftAssert sa = new SoftAssert();
         resultTitles.

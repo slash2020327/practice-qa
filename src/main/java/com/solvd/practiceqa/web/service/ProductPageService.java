@@ -14,8 +14,10 @@ public class ProductPageService {
     private final ShoppingCartPage shoppingCartPage;
 
     public ProductPageService(WebDriver driver) {
-        productPage = new ProductPage(driver);
-        shoppingCartPage = new ShoppingCartPage(driver);
+        String productEnd = TestDataService.getValue("product_end");
+        String cartEnd = TestDataService.getValue("cart_end");
+        productPage = new ProductPage(driver, productEnd);
+        shoppingCartPage = new ShoppingCartPage(driver, cartEnd);
     }
 
     public String getProductTitleText() {
@@ -30,10 +32,10 @@ public class ProductPageService {
         shoppingCartPage.open();
     }
 
-    public ShoppingCartPage addProductToBag() {
-        productPage.chooseSize(ConfigService.getValue("size"));
+    public ShoppingCartPage addProductToBag(String size) {
+        productPage.chooseSize(size);
         productPage.click(productPage.getAddToBagButton());
-        WaitUtil.sleep(3);
+        WaitUtil.waitVisibility(productPage.getDriver(), productPage.getPopupCloseButton());
         productPage.click(productPage.getPopupCloseButton());
         productPage.click(productPage.getBagButton());
         return shoppingCartPage;

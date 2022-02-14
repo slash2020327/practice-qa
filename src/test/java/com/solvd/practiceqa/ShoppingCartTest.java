@@ -2,6 +2,7 @@ package com.solvd.practiceqa;
 
 import com.solvd.practiceqa.web.pages.ShoppingCartPage;
 import com.solvd.practiceqa.web.service.ProductPageService;
+import com.solvd.practiceqa.web.service.TestDataService;
 import com.solvd.practiceqa.web.util.WaitUtil;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -21,8 +22,8 @@ public class ShoppingCartTest extends AbstractTest {
         productPageService.openProductPage();
         String productTitle = productPageService.getProductTitleText();
         ShoppingCartPage shoppingCartPage =
-                productPageService.addProductToBag();
-        WaitUtil.sleep(4);
+                productPageService.addProductToBag(TestDataService.getValue("size"));
+        WaitUtil.waitVisibility(driver, shoppingCartPage.getTitle());
         Assert.assertTrue(shoppingCartPage.getTitle().isDisplayed(), "Cart isn't opened");
         String cartTitle = productPageService.getLastProductTitle();
         Assert.assertEquals(cartTitle, productTitle, "The product isn't added to cart");

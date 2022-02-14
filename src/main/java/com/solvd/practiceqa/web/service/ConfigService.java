@@ -26,18 +26,6 @@ public class ConfigService {
             Set<String> configPropertyNames = property.stringPropertyNames();
             configPropertyNames
                     .forEach(name -> configData.put(name, property.getProperty(name)));
-
-            fis = new FileInputStream("src/test/resources/login.properties");
-            property.load(fis);
-            Set<String> loginPropertyNames = property.stringPropertyNames();
-            loginPropertyNames
-                    .forEach(name -> configData.put(name, property.getProperty(name)));
-
-            fis = new FileInputStream("src/test/resources/product.properties");
-            property.load(fis);
-            Set<String> productPropertyNames = property.stringPropertyNames();
-            productPropertyNames
-                    .forEach(name -> configData.put(name, property.getProperty(name)));
         } catch (IOException e) {
             LOGGER.warn("Property file can't be read");
         }

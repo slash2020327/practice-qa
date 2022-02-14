@@ -15,7 +15,7 @@ import java.time.Duration;
 public class WaitUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-    private static final Long explicitTimeout = Long.getLong(ConfigService.getValue(ConfigData.EXPLICIT_TIMEOUT));
+    private static final Long explicitTimeout = Long.parseLong(ConfigService.getValue(ConfigData.EXPLICIT_TIMEOUT));
 
     public static void waitVisibility(WebDriver driver, WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(explicitTimeout));

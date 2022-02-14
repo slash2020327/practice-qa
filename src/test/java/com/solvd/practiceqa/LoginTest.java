@@ -1,8 +1,8 @@
 package com.solvd.practiceqa;
 
 import com.solvd.practiceqa.web.pages.AccountPage;
-import com.solvd.practiceqa.web.service.ConfigService;
 import com.solvd.practiceqa.web.service.LoginService;
+import com.solvd.practiceqa.web.service.TestDataService;
 import com.solvd.practiceqa.web.util.WaitUtil;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -18,8 +18,8 @@ public class LoginTest extends AbstractTest {
     }
 
     @Test public void loginTest() {
-        String email = ConfigService.getValue("email");
-        String pass = ConfigService.getValue("password");
+        String email = TestDataService.getValue("email");
+        String pass = TestDataService.getValue("password");
         AccountPage accountPage = loginService.login(email, pass);
         WaitUtil.waitVisibility(driver, accountPage.getTitle());
         Assert.assertTrue(accountPage.getTitle().isDisplayed(), "Account page is not opened");

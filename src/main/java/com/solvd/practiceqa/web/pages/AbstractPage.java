@@ -1,16 +1,12 @@
 package com.solvd.practiceqa.web.pages;
 
 import com.solvd.practiceqa.web.util.WaitUtil;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.devtools.v97.page.Page;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public abstract class AbstractPage extends Page {
-
 
     protected final WebDriver driver;
     protected String url;
@@ -36,6 +32,7 @@ public abstract class AbstractPage extends Page {
 
     public void insert(WebElement inputField, String text) {
         inputField.sendKeys(text);
+        inputField.sendKeys(Keys.ENTER);
     }
 
     public void clear(WebElement element) {
