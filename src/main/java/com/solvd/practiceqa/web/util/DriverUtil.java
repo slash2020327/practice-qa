@@ -2,15 +2,11 @@ package com.solvd.practiceqa.web.util;
 
 import com.solvd.practiceqa.web.service.ConfigData;
 import com.solvd.practiceqa.web.service.ConfigService;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,19 +81,13 @@ public class DriverUtil {
         WebDriver driver = null;
         switch (browser) {
         case "chrome":
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.merge(capabilities);
-            driver = new ChromeDriver(chromeOptions);
+            driver = new ChromeDriver(capabilities);
             break;
         case "safari":
-            SafariOptions safariOptions = new SafariOptions();
-            safariOptions.merge(capabilities);
-            driver = new SafariDriver();
+            driver = new SafariDriver(capabilities);
             break;
         case "firefox":
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
-            firefoxOptions.merge(capabilities);
-            driver = new FirefoxDriver();
+            driver = new FirefoxDriver(capabilities);
         default:
             LOGGER.warn("Browser is not defined");
         }
