@@ -32,12 +32,6 @@ public class TestDataService {
             Set<String> productPropertyNames = property.stringPropertyNames();
             productPropertyNames
                     .forEach(name -> testData.put(name, property.getProperty(name)));
-
-            fis = new FileInputStream("src/test/resources/page.properties");
-            property.load(fis);
-            Set<String> pagePropertyNames = property.stringPropertyNames();
-            pagePropertyNames
-                    .forEach(name -> testData.put(name, property.getProperty(name)));
         } catch (IOException e) {
             LOGGER.warn("Property file can't be read");
         }

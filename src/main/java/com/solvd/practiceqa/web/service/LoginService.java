@@ -10,10 +10,8 @@ public class LoginService {
     private final AccountPage accountPage;
 
     public LoginService(WebDriver driver) {
-        String loginEnd = TestDataService.getValue("login_end");
-        String accountEnd = TestDataService.getValue("account_end");
-        loginPage = new LoginPage(driver, loginEnd);
-        accountPage = new AccountPage(driver, accountEnd);
+        loginPage = new LoginPage(driver);
+        accountPage = new AccountPage(driver);
     }
 
     public AccountPage login(String email, String pass) {

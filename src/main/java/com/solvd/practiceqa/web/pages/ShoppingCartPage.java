@@ -30,6 +30,8 @@ public class ShoppingCartPage extends AbstractPage {
 
     public ShoppingCartPage(WebDriver driver) {
         super(driver);
+        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL) + "/cart";
+        setUrl(pageUrl);
     }
 
     public ShoppingCartPage(WebDriver driver, String path) {

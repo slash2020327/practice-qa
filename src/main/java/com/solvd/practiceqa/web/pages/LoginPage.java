@@ -19,6 +19,8 @@ public class LoginPage extends AbstractPage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
+        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL) + "/account-login";
+        setUrl(pageUrl);
     }
 
     public LoginPage(WebDriver driver, String path) {

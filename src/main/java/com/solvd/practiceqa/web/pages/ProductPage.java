@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class ProductPage extends AbstractPage {
+public class ProductPage extends AbstractPage{
 
     @FindBy(xpath = "//div[contains(@class,'sidebar')]//h1")
     WebElement title;
@@ -24,6 +24,8 @@ public class ProductPage extends AbstractPage {
 
     public ProductPage(WebDriver driver) {
         super(driver);
+        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL) + "/ultraboost-22-shoes/GX5592.html";
+        setUrl(pageUrl);
     }
 
     public ProductPage(WebDriver driver, String path) {

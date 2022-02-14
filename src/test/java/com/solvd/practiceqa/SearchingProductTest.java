@@ -17,8 +17,7 @@ public class SearchingProductTest extends AbstractTest {
 
     @BeforeClass
     public void beforeSearching() {
-        String searchEnd = TestDataService.getValue("search_end");
-        productSearchingPage = new ProductSearchingPage(driver, searchEnd);
+        productSearchingPage = new ProductSearchingPage(driver);
     }
 
     @Test

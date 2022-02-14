@@ -27,6 +27,8 @@ public class ProductSearchingPage extends AbstractPage {
 
     public ProductSearchingPage(WebDriver driver) {
         super(driver);
+        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL) + "/women-new_arrivals";
+        setUrl(pageUrl);
     }
 
     public ProductSearchingPage(WebDriver driver, String path) {

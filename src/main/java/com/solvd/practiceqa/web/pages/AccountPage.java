@@ -18,6 +18,8 @@ public class AccountPage extends AbstractPage {
 
     public AccountPage(WebDriver driver) {
         super(driver);
+        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL) + "/my-account";
+        setUrl(pageUrl);
     }
 
     public AccountPage(WebDriver driver, String path) {

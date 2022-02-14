@@ -14,10 +14,8 @@ public class ProductPageService {
     private final ShoppingCartPage shoppingCartPage;
 
     public ProductPageService(WebDriver driver) {
-        String productEnd = TestDataService.getValue("product_end");
-        String cartEnd = TestDataService.getValue("cart_end");
-        productPage = new ProductPage(driver, productEnd);
-        shoppingCartPage = new ShoppingCartPage(driver, cartEnd);
+        productPage = new ProductPage(driver);
+        shoppingCartPage = new ShoppingCartPage(driver);
     }
 
     public String getProductTitleText() {
