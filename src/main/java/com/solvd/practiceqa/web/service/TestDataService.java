@@ -13,10 +13,11 @@ import java.util.Set;
 
 public class TestDataService {
 
+    private static TestDataService instance;
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private static Map<String, String> testData;
 
-    public TestDataService() {
+    private TestDataService() {
         testData = new HashMap<>();
         FileInputStream fis;
         Properties property = new Properties();
@@ -45,5 +46,12 @@ public class TestDataService {
             }
         }
         return value;
+    }
+
+    public static TestDataService createInstance() {
+        if (instance == null) {
+            instance = new TestDataService();
+        }
+        return instance;
     }
 }
