@@ -12,8 +12,16 @@ public class DriverUtil {
     public static ConcurrentHashMap<String, WebDriver> drivers = new ConcurrentHashMap<>();
 
     public static WebDriver getDriver(String name) {
-        ChromeDriver driver = new ChromeDriver();
-        drivers.put(name, driver);
+        WebDriver driver = null;
+        for (Map.Entry<String, WebDriver> entry : drivers.entrySet()) {
+            if (name.equals(entry.getKey())) {
+                driver = entry.getValue();
+            }
+        }
+        if (driver == null) {
+            driver = new ChromeDriver();
+            drivers.put(name, driver);
+        }
         return driver;
     }
 
@@ -37,15 +45,5 @@ public class DriverUtil {
             entry.getValue().quit();
             drivers.remove(entry.getKey());
         }
-    }
-
-    public static WebDriver getDriverByName(String name) {
-        WebDriver driver = null;
-        for (Map.Entry<String, WebDriver> entry : drivers.entrySet()) {
-            if (name.equals(entry.getKey())) {
-                driver = entry.getValue();
-            }
-        }
-        return driver;
     }
 }
