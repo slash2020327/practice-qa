@@ -9,31 +9,23 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class DriverUtil {
 
-    public static ConcurrentHashMap<Integer, WebDriver> drivers = new ConcurrentHashMap<>();
+    public static ConcurrentHashMap<String, WebDriver> drivers = new ConcurrentHashMap<>();
 
-    public static WebDriver getDriver() {
+    public static WebDriver getDriver(String name) {
         ChromeDriver driver = new ChromeDriver();
-        drivers.put(driver.hashCode(), driver);
+        drivers.put(name, driver);
         return driver;
     }
 
-    public static WebDriver getIncognitoDriver() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("incognito");
+    public static WebDriver getOptionsDriver(String name, ChromeOptions options) {
         ChromeDriver driver = new ChromeDriver(options);
-        drivers.put(driver.hashCode(), driver);
-        return driver;
-    }
-
-    public static WebDriver getOptionsDriver(ChromeOptions options) {
-        ChromeDriver driver = new ChromeDriver(options);
-        drivers.put(driver.hashCode(), driver);
+        drivers.put(name, driver);
         return driver;
     }
 
     public static void releaseDriver(WebDriver driver) {
-        for (Map.Entry<Integer, WebDriver> entry : drivers.entrySet()) {
-            if (entry.getValue().equals(driver)) {
+        for (Map.Entry<String, WebDriver> entry : drivers.entrySet()) {
+            if (driver.equals(entry.getValue())) {
                 entry.getValue().quit();
                 drivers.remove(entry.getKey());
             }
@@ -41,9 +33,19 @@ public class DriverUtil {
     }
 
     public static void releaseDrivers() {
-        for (Map.Entry<Integer, WebDriver> entry : drivers.entrySet()) {
+        for (Map.Entry<String, WebDriver> entry : drivers.entrySet()) {
             entry.getValue().quit();
             drivers.remove(entry.getKey());
         }
+    }
+
+    public static WebDriver getDriverByName(String name) {
+        WebDriver driver = null;
+        for (Map.Entry<String, WebDriver> entry : drivers.entrySet()) {
+            if (name.equals(entry.getKey())) {
+                driver = entry.getValue();
+            }
+        }
+        return driver;
     }
 }
