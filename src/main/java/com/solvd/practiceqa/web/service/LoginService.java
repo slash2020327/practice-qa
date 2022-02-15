@@ -1,7 +1,7 @@
 package com.solvd.practiceqa.web.service;
 
-import com.solvd.practiceqa.web.pages.AccountPage;
-import com.solvd.practiceqa.web.pages.LoginPage;
+import com.solvd.practiceqa.web.pages.desktop.AccountPage;
+import com.solvd.practiceqa.web.pages.desktop.LoginPage;
 import org.openqa.selenium.WebDriver;
 
 public class LoginService {

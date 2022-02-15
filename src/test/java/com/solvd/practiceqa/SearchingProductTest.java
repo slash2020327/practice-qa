@@ -1,6 +1,6 @@
 package com.solvd.practiceqa;
 
-import com.solvd.practiceqa.web.pages.ProductSearchingPage;
+import com.solvd.practiceqa.web.pages.desktop.SearchPage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -11,11 +11,11 @@ import java.util.List;
 
 public class SearchingProductTest extends AbstractTest {
 
-    private static ProductSearchingPage productSearchingPage;
+    private static SearchPage productSearchingPage;
 
     @BeforeClass
     public void beforeSearching() {
-        productSearchingPage = new ProductSearchingPage(getDriver());
+        productSearchingPage = new SearchPage(getDriver());
     }
 
     @Test

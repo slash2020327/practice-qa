@@ -1,11 +1,15 @@
-package com.solvd.practiceqa.web.pages;
+package com.solvd.practiceqa.web.pages.android;
 
-import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.solvd.practiceqa.web.components.desktop.Header;
+import com.solvd.practiceqa.web.pages.LoginPageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends AdidasPage {
+public class AndroidLoginPage extends LoginPageBase {
+
+    @FindBy(xpath = "//div[contains(@class, 'header-mobile')]")
+    protected Header header;
 
     @FindBy(xpath = "//input[@id='login-email']")
     private ExtendedWebElement emailField;
@@ -16,9 +20,12 @@ public class LoginPage extends AdidasPage {
     @FindBy(xpath = "//button[@type='submit']")
     private ExtendedWebElement loginButton;
 
-    public LoginPage(WebDriver driver) {
+    public AndroidLoginPage(WebDriver driver) {
         super(driver);
-        setPageAbsoluteURL(R.CONFIG.get("base_url") + "/account-login");
+    }
+
+    public Header getHeader() {
+        return header;
     }
 
     public ExtendedWebElement getEmailField() {

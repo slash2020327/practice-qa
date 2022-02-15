@@ -1,7 +1,7 @@
 package com.solvd.practiceqa;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
-import com.solvd.practiceqa.web.pages.ShoppingCartPage;
+import com.solvd.practiceqa.web.pages.desktop.CartPage;
 import com.solvd.practiceqa.web.service.ProductPageService;
 import com.solvd.practiceqa.web.service.TestDataService;
 import org.testng.Assert;
@@ -21,7 +21,7 @@ public class ShoppingCartTest extends AbstractTest implements IAbstractTest {
     public void addToBagTest() {
         productPageService.openProductPage();
         String productTitle = productPageService.getProductTitleText();
-        ShoppingCartPage shoppingCartPage =
+        CartPage shoppingCartPage =
                 productPageService.addProductToBag(TestDataService.getValue("size"));
         Assert.assertTrue(shoppingCartPage.isPageOpened(), "Cart isn't opened");
         String cartTitle = productPageService.getLastProductTitle();

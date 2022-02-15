@@ -1,8 +1,8 @@
-package com.solvd.practiceqa.web.pages;
+package com.solvd.practiceqa.web.pages.desktop;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.solvd.practiceqa.web.components.Footer;
-import com.solvd.practiceqa.web.components.Header;
+import com.solvd.practiceqa.web.components.desktop.Footer;
+import com.solvd.practiceqa.web.components.desktop.Header;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 

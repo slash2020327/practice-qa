@@ -36,7 +36,7 @@ com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement.doAc
 com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement.click(ExtendedWebElement.java:458)
 com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement.click(ExtendedWebElement.java:447)
 com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement.click(ExtendedWebElement.java:438)
-com.solvd.practiceqa.web.pages.ProductSearchingPage.sortSearch(ProductSearchingPage.java:45)
+com.solvd.practiceqa.web.pages.desktop.SearchPage.sortSearch(ProductSearchingPage.java:45)
 com.solvd.practiceqa.SearchingProductTest.sortingPriceTest(SearchingProductTest.java:29)
 java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

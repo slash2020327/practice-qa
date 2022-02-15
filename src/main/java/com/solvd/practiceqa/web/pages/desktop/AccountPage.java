@@ -1,13 +1,20 @@
-package com.solvd.practiceqa.web.pages;
+package com.solvd.practiceqa.web.pages.desktop;
 
 import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.solvd.practiceqa.web.components.desktop.Header;
+import com.solvd.practiceqa.web.pages.AccountPageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class AccountPage extends AdidasPage {
+@DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = AccountPageBase.class)
+public class AccountPage extends AccountPageBase {
+
+    @FindBy(xpath = "//div[contains(@class, 'header-bottom')]")
+    protected Header header;
 
     @FindBy(xpath = "//h1[contains(@class, heading)]")
     private ExtendedWebElement title;
@@ -18,6 +25,10 @@ public class AccountPage extends AdidasPage {
     public AccountPage(WebDriver driver) {
         super(driver);
         setPageAbsoluteURL(R.CONFIG.get("base_url") + "/my-account");
+    }
+
+    public Header getHeader() {
+        return header;
     }
 
     public ExtendedWebElement getPageTitle() {

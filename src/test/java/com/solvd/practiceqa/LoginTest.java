@@ -1,6 +1,6 @@
 package com.solvd.practiceqa;
 
-import com.solvd.practiceqa.web.pages.AccountPage;
+import com.solvd.practiceqa.web.pages.desktop.AccountPage;
 import com.solvd.practiceqa.web.service.LoginService;
 import com.solvd.practiceqa.web.service.TestDataService;
 import org.testng.Assert;

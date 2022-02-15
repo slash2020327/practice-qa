@@ -1,34 +1,41 @@
-package com.solvd.practiceqa.web.pages;
+package com.solvd.practiceqa.web.pages.android;
 
-import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.solvd.practiceqa.web.components.desktop.Header;
+import com.solvd.practiceqa.web.pages.SearchPageBase;
+import com.solvd.practiceqa.web.pages.desktop.HomePage;
 import com.solvd.practiceqa.web.service.TestDataService;
-import com.solvd.practiceqa.web.util.WaitUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductSearchingPage extends AdidasPage {
+public class AndroidSearchPage extends SearchPageBase {
 
-    @FindBy(xpath = "//div[contains(@class,'controllers')]//button[contains(@class,'select')]//span[contains(@class,'text')]")
+    @FindBy(xpath = "//div[contains(@class, 'header-mobile')]")
+    protected Header header;
+
+    @FindBy(xpath = "//div[contains(@class,'filters-icon')]")
+    private ExtendedWebElement filterIcon;
+
+    @FindBy(xpath = "//div[contains(@class,'filters-icon')]//span[@title='Sort By']")
     private ExtendedWebElement sortButton;
 
-    @FindBy(xpath = "//div[contains(@class,'sortby')]//div[contains(@class,'options')]//button")
+    @FindBy(xpath = "//div[contains(@class,'filters-icon')]//li[contains(@class,'sort')]")
     private List<ExtendedWebElement> sortingOptions;
 
-        @FindBy(xpath = "//div[contains(@class,'grid-item')]//div[contains(@class, 'price')]/div[1]")
+    @FindBy(xpath = "//div[contains(@class,'grid-item')]//div[contains(@class, 'price')]/div[1]")
     private List<ExtendedWebElement> productPrice;
 
     @FindBy(xpath = "//p[contains(@class,'product-card') and contains(@class,'title')]")
     private List<ExtendedWebElement> productTitles;
 
-    public ProductSearchingPage(WebDriver driver) {
+    public AndroidSearchPage(WebDriver driver) {
         super(driver);
-        setPageAbsoluteURL(R.CONFIG.get("base_url") + "/women-new_arrivals");
     }
 
+    @Override
     public void chooseOption(String title) {
         ExtendedWebElement option = sortingOptions.stream()
                 .filter(webElement -> webElement.getText().equals(title))
@@ -37,15 +44,17 @@ public class ProductSearchingPage extends AdidasPage {
         option.click();
     }
 
+    @Override
     public List<ExtendedWebElement> sortSearch() {
         open();
+        filterIcon.click();
         sortButton.click();
         String sortOption = TestDataService.getValue("sorting_option");
         chooseOption(sortOption);
-        WaitUtil.sleep(5);
         return getProductPrice();
     }
 
+    @Override
     public List<Integer> getResultPrices() {
         List<ExtendedWebElement> prices = sortSearch();
         return prices.stream()
@@ -55,6 +64,7 @@ public class ProductSearchingPage extends AdidasPage {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public List<String> getResultTitles() {
         List<ExtendedWebElement> titles = getProductTitles();
         return titles.stream()
@@ -63,11 +73,20 @@ public class ProductSearchingPage extends AdidasPage {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public void searchInput(String text) {
         HomePage homePage = new HomePage(driver);
         homePage.open();
         ExtendedWebElement searchField = homePage.getHeader().getSearchField();
         searchField.type(text);
+    }
+
+    public Header getHeader() {
+        return header;
+    }
+
+    public ExtendedWebElement getFilterIcon() {
+        return filterIcon;
     }
 
     public ExtendedWebElement getSortButton() {
