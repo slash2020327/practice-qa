@@ -1,61 +1,53 @@
 package com.solvd.practiceqa.web.pages;
 
-import com.solvd.practiceqa.web.service.ConfigData;
-import com.solvd.practiceqa.web.service.ConfigService;
+import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class ProductPage extends AbstractPage{
+public class ProductPage extends AdidasPage {
 
     @FindBy(xpath = "//div[contains(@class,'sidebar')]//h1")
-    WebElement title;
+    private ExtendedWebElement title;
 
     @FindBy(xpath = "//button[contains(@class, 'size')]")
-    List<WebElement> sizeGrid;
+    private List<ExtendedWebElement> sizeGrid;
 
     @FindBy(xpath = "//button[@title='Add To Bag']")
-    WebElement addToBagButton;
+    private ExtendedWebElement addToBagButton;
 
     @FindBy(xpath = "//button[@class='gl-modal__close']")
-    WebElement popupCloseButton;
+    private ExtendedWebElement popupCloseButton;
 
     public ProductPage(WebDriver driver) {
         super(driver);
-        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL) + "/ultraboost-22-shoes/GX5592.html";
-        setUrl(pageUrl);
-    }
-
-    public ProductPage(WebDriver driver, String path) {
-        super(driver);
-        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL);
-        setUrl(pageUrl + path);
+        setPageAbsoluteURL(R.CONFIG.get("base_url") + "/ultraboost-22-shoes/GX5592.html");
     }
 
     public void chooseSize(String size) {
-        WebElement chosenSize;
+        ExtendedWebElement chosenSize;
         chosenSize = sizeGrid.stream()
                 .filter(item -> size.equals(item.getText()))
                 .findFirst()
                 .get();
-        click(chosenSize);
+        chosenSize.click();
     }
 
-    public List<WebElement> getSizeGrid() {
+    public List<ExtendedWebElement> getSizeGrid() {
         return sizeGrid;
     }
 
-    public WebElement getAddToBagButton() {
+    public ExtendedWebElement getAddToBagButton() {
         return addToBagButton;
     }
 
-    public WebElement getPopupCloseButton() {
+    public ExtendedWebElement getPopupCloseButton() {
         return popupCloseButton;
     }
 
-    public WebElement getTitle() {
+    public ExtendedWebElement getPageTitle() {
         return title;
     }
 }

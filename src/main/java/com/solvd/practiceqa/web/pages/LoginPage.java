@@ -1,43 +1,35 @@
 package com.solvd.practiceqa.web.pages;
 
-import com.solvd.practiceqa.web.service.ConfigData;
-import com.solvd.practiceqa.web.service.ConfigService;
+import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends AbstractPage {
+public class LoginPage extends AdidasPage {
 
     @FindBy(xpath = "//input[@id='login-email']")
-    private WebElement emailField;
+    private ExtendedWebElement emailField;
 
     @FindBy(xpath = "//input[@id='login-password']")
-    private WebElement passwordField;
+    private ExtendedWebElement passwordField;
 
     @FindBy(xpath = "//button[@type='submit']")
-    private WebElement loginButton;
+    private ExtendedWebElement loginButton;
 
     public LoginPage(WebDriver driver) {
         super(driver);
-        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL) + "/account-login";
-        setUrl(pageUrl);
+        setPageAbsoluteURL(R.CONFIG.get("base_url") + "/account-login");
     }
 
-    public LoginPage(WebDriver driver, String path) {
-        super(driver);
-        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL);
-        setUrl(pageUrl + path);
-    }
-
-    public WebElement getEmailField() {
+    public ExtendedWebElement getEmailField() {
         return emailField;
     }
 
-    public WebElement getPasswordField() {
+    public ExtendedWebElement getPasswordField() {
         return passwordField;
     }
 
-    public WebElement getLoginButton() {
+    public ExtendedWebElement getLoginButton() {
         return loginButton;
     }
 }

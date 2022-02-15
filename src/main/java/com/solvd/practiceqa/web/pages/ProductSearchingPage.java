@@ -1,53 +1,45 @@
 package com.solvd.practiceqa.web.pages;
 
-import com.solvd.practiceqa.web.service.ConfigData;
-import com.solvd.practiceqa.web.service.ConfigService;
+import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.solvd.practiceqa.web.service.TestDataService;
 import com.solvd.practiceqa.web.util.WaitUtil;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductSearchingPage extends AbstractPage {
+public class ProductSearchingPage extends AdidasPage {
 
     @FindBy(xpath = "//div[contains(@class,'controllers')]//button[contains(@class,'select')]//span[contains(@class,'text')]")
-    private WebElement sortButton;
+    private ExtendedWebElement sortButton;
 
     @FindBy(xpath = "//div[contains(@class,'sortby')]//div[contains(@class,'options')]//button")
-    private List<WebElement> sortingOptions;
+    private List<ExtendedWebElement> sortingOptions;
 
         @FindBy(xpath = "//div[contains(@class,'grid-item')]//div[contains(@class, 'price')]/div[1]")
-    private List<WebElement> productPrice;
+    private List<ExtendedWebElement> productPrice;
 
     @FindBy(xpath = "//p[contains(@class,'product-card') and contains(@class,'title')]")
-    private List<WebElement> productTitles;
+    private List<ExtendedWebElement> productTitles;
 
     public ProductSearchingPage(WebDriver driver) {
         super(driver);
-        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL) + "/women-new_arrivals";
-        setUrl(pageUrl);
-    }
-
-    public ProductSearchingPage(WebDriver driver, String path) {
-        super(driver);
-        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL);
-        setUrl(pageUrl + path);
+        setPageAbsoluteURL(R.CONFIG.get("base_url") + "/women-new_arrivals");
     }
 
     public void chooseOption(String title) {
-        WebElement option = sortingOptions.stream()
+        ExtendedWebElement option = sortingOptions.stream()
                 .filter(webElement -> webElement.getText().equals(title))
                 .findFirst()
                 .get();
-        click(option);
+        option.click();
     }
 
-    public List<WebElement> sortSearch() {
+    public List<ExtendedWebElement> sortSearch() {
         open();
-        click(sortButton);
+        sortButton.click();
         String sortOption = TestDataService.getValue("sorting_option");
         chooseOption(sortOption);
         WaitUtil.sleep(5);
@@ -55,18 +47,18 @@ public class ProductSearchingPage extends AbstractPage {
     }
 
     public List<Integer> getResultPrices() {
-        List<WebElement> prices = sortSearch();
+        List<ExtendedWebElement> prices = sortSearch();
         return prices.stream()
-                .map(WebElement::getText)
+                .map(ExtendedWebElement::getText)
                 .map(text -> text.substring(1).replaceAll("[,]", ""))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
     public List<String> getResultTitles() {
-        List<WebElement> titles = getProductTitles();
+        List<ExtendedWebElement> titles = getProductTitles();
         return titles.stream()
-                .map(WebElement::getText)
+                .map(ExtendedWebElement::getText)
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
     }
@@ -74,23 +66,23 @@ public class ProductSearchingPage extends AbstractPage {
     public void searchInput(String text) {
         HomePage homePage = new HomePage(driver);
         homePage.open();
-        WebElement searchField = homePage.getSearchField();
-        insert(searchField, text);
+        ExtendedWebElement searchField = homePage.getHeader().getSearchField();
+        searchField.type(text);
     }
 
-    public WebElement getSortButton() {
+    public ExtendedWebElement getSortButton() {
         return sortButton;
     }
 
-    public List<WebElement> getSortingOptions() {
+    public List<ExtendedWebElement> getSortingOptions() {
         return sortingOptions;
     }
 
-    public List<WebElement> getProductPrice() {
+    public List<ExtendedWebElement> getProductPrice() {
         return productPrice;
     }
 
-    public List<WebElement> getProductTitles() {
+    public List<ExtendedWebElement> getProductTitles() {
         return productTitles;
     }
 }

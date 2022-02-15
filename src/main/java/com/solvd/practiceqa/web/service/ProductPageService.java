@@ -1,10 +1,9 @@
 package com.solvd.practiceqa.web.service;
 
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.solvd.practiceqa.web.pages.ProductPage;
 import com.solvd.practiceqa.web.pages.ShoppingCartPage;
-import com.solvd.practiceqa.web.util.WaitUtil;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class ProductPageService {
     }
 
     public String getProductTitleText() {
-        return productPage.getTitle().getText();
+        return productPage.getPageTitle().getText();
     }
 
     public void openProductPage() {
@@ -32,16 +31,15 @@ public class ProductPageService {
 
     public ShoppingCartPage addProductToBag(String size) {
         productPage.chooseSize(size);
-        productPage.click(productPage.getAddToBagButton());
-        WaitUtil.waitVisibility(productPage.getDriver(), productPage.getPopupCloseButton());
-        productPage.click(productPage.getPopupCloseButton());
-        productPage.click(productPage.getBagButton());
+        productPage.getAddToBagButton().click();
+        productPage.getPopupCloseButton().click();
+        productPage.getHeader().getBagButton().click();
         return shoppingCartPage;
     }
 
     public String getLastProductTitle() {
-        List<WebElement> webTitles = shoppingCartPage.getProductTitle();
-        WebElement lastProductTitle = webTitles.get(webTitles.size() - 1);
+        List<ExtendedWebElement> webTitles = shoppingCartPage.getProducts();
+        ExtendedWebElement lastProductTitle = webTitles.get(webTitles.size() - 1);
         return lastProductTitle.getText();
     }
 }

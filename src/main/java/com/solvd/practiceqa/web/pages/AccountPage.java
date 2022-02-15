@@ -1,38 +1,30 @@
 package com.solvd.practiceqa.web.pages;
 
-import com.solvd.practiceqa.web.service.ConfigData;
-import com.solvd.practiceqa.web.service.ConfigService;
+import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class AccountPage extends AbstractPage {
+public class AccountPage extends AdidasPage {
 
     @FindBy(xpath = "//h1[contains(@class, heading)]")
-    private WebElement title;
+    private ExtendedWebElement title;
 
     @FindBy(xpath = "//button[@role='tab']")
-    private List<WebElement> accountLinks;
+    private List<ExtendedWebElement> accountLinks;
 
     public AccountPage(WebDriver driver) {
         super(driver);
-        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL) + "/my-account";
-        setUrl(pageUrl);
+        setPageAbsoluteURL(R.CONFIG.get("base_url") + "/my-account");
     }
 
-    public AccountPage(WebDriver driver, String path) {
-        super(driver);
-        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL);
-        setUrl(pageUrl + path);
-    }
-
-    public WebElement getTitle() {
+    public ExtendedWebElement getPageTitle() {
         return title;
     }
 
-    public List<WebElement> getAccountLinks() {
+    public List<ExtendedWebElement> getAccountLinks() {
         return accountLinks;
     }
 }
