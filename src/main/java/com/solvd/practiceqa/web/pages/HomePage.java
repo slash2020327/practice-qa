@@ -1,14 +1,12 @@
 package com.solvd.practiceqa.web.pages;
 
-import com.solvd.practiceqa.web.service.ConfigData;
-import com.solvd.practiceqa.web.service.ConfigService;
+import com.qaprosoft.carina.core.foundation.utils.R;
 import org.openqa.selenium.WebDriver;
 
-public class HomePage extends AbstractPage {
+public class HomePage extends AdidasPage {
 
     public HomePage(WebDriver driver) {
         super(driver);
-        String pageUrl = ConfigService.getValue(ConfigData.BASE_URL);
-        setUrl(pageUrl);
+        setPageAbsoluteURL(R.CONFIG.get("base_url"));
     }
 }

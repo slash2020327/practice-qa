@@ -1,0 +1,28 @@
+[2022-02-15 11:26:45] [TestRunRegistrar.java] [1] [WARN] Reporting disabled: using no op test run registrar
+[2022-02-15 11:26:45] [IMessager.java] [1] [INFO] TEST [practice-qa - addToBagTest] STARTED at [11:26:45 2022-02-15]
+[2022-02-15 11:26:45] [IMessager.java] [28] [INFO] INFO: opening url 'https://www.adidas.com/us/ultraboost-22-shoes/GX5592.html'
+[2022-02-15 11:26:49] [DriverListener.java] [28] [INFO] URL 'https://www.adidas.com/us/ultraboost-22-shoes/GX5592.html' opened
+[2022-02-15 11:26:50] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:26:50] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:26:50] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:26:50] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:26:50] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:26:50] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:26:50] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:26:50] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:26:50] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:26:50] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:26:50] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:26:50] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:26:50] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:26:50] [DriverListener.java] [1] [INFO] PASS: element 'sizeGrid6' is clicked.
+[2022-02-15 11:26:50] [DriverListener.java] [1] [INFO] PASS: element 'addToBagButton' is clicked.
+[2022-02-15 11:26:52] [DriverListener.java] [1] [INFO] PASS: element 'popupCloseButton' is clicked.
+[2022-02-15 11:26:54] [DriverListener.java] [1] [INFO] PASS: element 'bagButton' is clicked.
+[2022-02-15 11:27:21] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:27:21] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:27:25] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:27:36] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:27:36] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:27:36] [CryptoTool.java] [1] [ERROR] Can't load secret key!
+[2022-02-15 11:27:36] [CryptoTool.java] [1] [ERROR] Can't load secret key!

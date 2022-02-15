@@ -10,15 +10,15 @@ public class LoginService {
     private final AccountPage accountPage;
 
     public LoginService(WebDriver driver) {
-        loginPage = new LoginPage(driver);
-        accountPage = new AccountPage(driver);
+        this.loginPage = new LoginPage(driver);
+        this.accountPage = new AccountPage(driver);
     }
 
     public AccountPage login(String email, String pass) {
         loginPage.open();
-        loginPage.insert(loginPage.getEmailField(), email);
-        loginPage.insert(loginPage.getPasswordField(), pass);
-        loginPage.click(loginPage.getLoginButton());
+        loginPage.getEmailField().type(email);
+        loginPage.getPasswordField().type(pass);
+        loginPage.getLoginButton().click();
         return accountPage;
     }
 }
