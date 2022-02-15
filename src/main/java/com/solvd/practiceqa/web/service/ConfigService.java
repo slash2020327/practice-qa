@@ -13,10 +13,11 @@ import java.util.Set;
 
 public class ConfigService {
 
+    private static ConfigService instance;
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private static Map<String, String> configData;
 
-    public ConfigService() {
+    private ConfigService() {
         configData = new HashMap<>();
         FileInputStream fis;
         Properties property = new Properties();
@@ -49,5 +50,12 @@ public class ConfigService {
             }
         }
         return value;
+    }
+
+    public static ConfigService createInstance() {
+        if (instance == null) {
+            instance = new ConfigService();
+        }
+        return instance;
     }
 }

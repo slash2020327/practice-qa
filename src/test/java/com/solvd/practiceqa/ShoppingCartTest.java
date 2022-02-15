@@ -3,7 +3,9 @@ package com.solvd.practiceqa;
 import com.solvd.practiceqa.web.pages.ShoppingCartPage;
 import com.solvd.practiceqa.web.service.ProductPageService;
 import com.solvd.practiceqa.web.service.TestDataService;
+import com.solvd.practiceqa.web.util.DriverUtil;
 import com.solvd.practiceqa.web.util.WaitUtil;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -14,11 +16,13 @@ public class ShoppingCartTest extends AbstractTest {
 
     @BeforeClass
     public void beforeCartTest() {
+        WebDriver driver = DriverUtil.getDriver("cart");
         productPageService = new ProductPageService(driver);
     }
 
     @Test
     public void addToBagTest() {
+        WebDriver driver = DriverUtil.getDriver("cart");
         productPageService.openProductPage();
         String productTitle = productPageService.getProductTitleText();
         ShoppingCartPage shoppingCartPage =

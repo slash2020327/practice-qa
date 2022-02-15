@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public abstract class AbstractPage extends Page {
 
-    protected final WebDriver driver;
+    protected WebDriver driver;
     protected String url;
 
     @FindBy(xpath = "//a[contains(@class,'logo')]")
@@ -54,6 +54,10 @@ public abstract class AbstractPage extends Page {
 
     public WebDriver getDriver() {
         return driver;
+    }
+
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
     }
 
     public String getUrl() {

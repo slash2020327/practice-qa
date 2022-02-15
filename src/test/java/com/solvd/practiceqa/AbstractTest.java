@@ -1,28 +1,20 @@
 package com.solvd.practiceqa;
 
 import com.solvd.practiceqa.web.service.ConfigService;
-import com.solvd.practiceqa.web.service.DriverService;
 import com.solvd.practiceqa.web.service.TestDataService;
-import org.openqa.selenium.WebDriver;
+import com.solvd.practiceqa.web.util.DriverUtil;
 import org.testng.annotations.*;
 
-public class AbstractTest {
-
-    protected static WebDriver driver;
+public abstract class AbstractTest {
 
     @BeforeSuite
     public void beforeSuite() {
-        new ConfigService();
-        new TestDataService();
-    }
-
-    @BeforeTest
-    public void beforeTests() {
-        driver = DriverService.driverInit();
+        ConfigService.createInstance();
+        TestDataService.createInstance();
     }
 
     @AfterTest
     public void afterTests() {
-        driver.quit();
+        DriverUtil.releaseDrivers();
     }
 }
