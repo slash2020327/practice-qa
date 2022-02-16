@@ -39,21 +39,23 @@ public class AndroidSearchPage extends SearchPageBase {
     }
 
     @Override
-    public void chooseOption(String title) {
+    public AndroidSearchPage chooseOption(String title) {
         ExtendedWebElement option = sortingOptions.stream()
                 .filter(webElement -> webElement.getText().equalsIgnoreCase(title))
                 .findFirst()
                 .get();
         option.click();
+        return this;
     }
 
     @Override
-    public void sortSearch() {
+    public AndroidSearchPage sortSearch() {
         open();
         filterIcon.click();
         sortButton.click();
         String sortOption = TestDataService.getValue("sorting_option");
         chooseOption(sortOption);
+        return this;
     }
 
     @Override
@@ -75,7 +77,8 @@ public class AndroidSearchPage extends SearchPageBase {
     }
 
     @Override
-    public void searchInput(String text) {
+    public AndroidSearchPage searchInput(String text) {
         header.inputSearchText(text);
+        return this;
     }
 }

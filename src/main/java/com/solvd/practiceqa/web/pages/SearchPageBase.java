@@ -11,13 +11,13 @@ public abstract class SearchPageBase extends AbstractPage {
         super(driver);
     }
 
-    public abstract void chooseOption(String title);
+    public abstract SearchPageBase chooseOption(String title);
 
-    public abstract void sortSearch();
+    public abstract SearchPageBase sortSearch();
 
     public abstract List<Integer> getResultPrices();
 
     public abstract List<String> getResultTitles();
 
-    public abstract void searchInput(String text);
+    public abstract SearchPageBase searchInput(String text);
 }
