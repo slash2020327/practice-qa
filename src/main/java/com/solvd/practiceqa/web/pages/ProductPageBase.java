@@ -9,7 +9,7 @@ public abstract class ProductPageBase extends AbstractPage {
         super(driver);
     }
 
-    public abstract void chooseSize(String size);
+    public abstract ProductPageBase chooseSize(String size);
 
     public abstract String getProductTitleText();
 

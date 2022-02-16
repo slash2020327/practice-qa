@@ -35,13 +35,14 @@ public class AndroidProductPage extends ProductPageBase {
     }
 
     @Override
-    public void chooseSize(String size) {
+    public AndroidProductPage chooseSize(String size) {
         ExtendedWebElement chosenSize;
         chosenSize = sizeGrid.stream()
                 .filter(item -> size.equals(item.getText()))
                 .findFirst()
                 .get();
         chosenSize.click();
+        return this;
     }
 
     @Override

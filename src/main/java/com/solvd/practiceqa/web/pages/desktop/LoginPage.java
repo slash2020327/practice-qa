@@ -29,13 +29,15 @@ public class LoginPage extends LoginPageBase {
     }
 
     @Override
-    public void typeEmail(String email) {
+    public LoginPage typeEmail(String email) {
         emailField.type(email);
+        return this;
     }
 
     @Override
-    public void typePassword(String password) {
+    public LoginPage typePassword(String password) {
         passwordField.type(password);
+        return this;
     }
 
     @Override

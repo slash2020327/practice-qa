@@ -50,12 +50,13 @@ public class ProductPage extends ProductPageBase {
     }
 
     @Override
-    public void chooseSize(String size) {
+    public ProductPage chooseSize(String size) {
         ExtendedWebElement chosenSize;
         chosenSize = sizeGrid.stream()
                 .filter(item -> size.equals(item.getText()))
                 .findFirst()
                 .get();
         chosenSize.click();
+        return this;
     }
 }

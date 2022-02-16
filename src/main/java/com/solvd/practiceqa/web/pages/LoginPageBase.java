@@ -9,9 +9,9 @@ public abstract class LoginPageBase extends AbstractPage {
         super(driver);
     }
 
-    public abstract void typeEmail(String email);
+    public abstract LoginPageBase typeEmail(String email);
 
-    public abstract void typePassword(String password);
+    public abstract LoginPageBase typePassword(String password);
 
     public abstract AccountPageBase clickLoginButton();
 }
