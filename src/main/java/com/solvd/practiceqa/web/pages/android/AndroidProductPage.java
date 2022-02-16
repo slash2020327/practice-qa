@@ -50,7 +50,7 @@ public class AndroidProductPage extends ProductPageBase {
     }
 
     @Override
-    public CartPageBase addProductToBag(String size) {
+    public AndroidCartPage addProductToBag(String size) {
         chooseSize(size);
         addToBagButton.click();
         popupCloseButton.click();
