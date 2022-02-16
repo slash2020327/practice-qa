@@ -5,6 +5,7 @@ import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.solvd.practiceqa.web.components.android.AndroidCartProduct;
 import com.solvd.practiceqa.web.components.android.AndroidHeader;
+import com.solvd.practiceqa.web.components.desktop.CartProduct;
 import com.solvd.practiceqa.web.pages.CartPageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -34,26 +35,9 @@ public class AndroidCartPage extends CartPageBase {
 
     @Override
     public String getLastProductTitle() {
-        List<ExtendedWebElement> webTitles = products.stream()
-                .map(AndroidCartProduct::getProductTitle)
+        List<String> webTitles = products.stream()
+                .map(AndroidCartProduct::getProductTitleText)
                 .collect(Collectors.toList());
-        ExtendedWebElement lastProductTitle = webTitles.get(webTitles.size() - 1);
-        return lastProductTitle.getText();
-    }
-
-    public AndroidHeader getHeader() {
-        return header;
-    }
-
-    public ExtendedWebElement getPageTitle() {
-        return title;
-    }
-
-    public List<AndroidCartProduct> getProducts() {
-        return products;
-    }
-
-    public ExtendedWebElement getCheckoutButton() {
-        return checkoutButton;
+        return webTitles.get(webTitles.size() - 1);
     }
 }

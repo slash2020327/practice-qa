@@ -6,6 +6,7 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.solvd.practiceqa.web.components.desktop.Header;
 import com.solvd.practiceqa.web.pages.CartPageBase;
 import com.solvd.practiceqa.web.pages.ProductPageBase;
+import com.solvd.practiceqa.web.pages.android.AndroidCartPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -40,12 +41,12 @@ public class ProductPage extends ProductPageBase {
     }
 
     @Override
-    public CartPageBase addProductToBag(String size) {
+    public CartPage addProductToBag(String size) {
         chooseSize(size);
         addToBagButton.click();
         popupCloseButton.click();
-        header.getBagButton().click();
-        return new CartPage(this.getDriver());
+        header.clickBagButton();
+        return new CartPage(getDriver());
     }
 
     @Override
@@ -56,25 +57,5 @@ public class ProductPage extends ProductPageBase {
                 .findFirst()
                 .get();
         chosenSize.click();
-    }
-
-    public Header getHeader() {
-        return header;
-    }
-
-    public List<ExtendedWebElement> getSizeGrid() {
-        return sizeGrid;
-    }
-
-    public ExtendedWebElement getAddToBagButton() {
-        return addToBagButton;
-    }
-
-    public ExtendedWebElement getPopupCloseButton() {
-        return popupCloseButton;
-    }
-
-    public ExtendedWebElement getPageTitle() {
-        return title;
     }
 }

@@ -11,4 +11,6 @@ public abstract class HeaderBase extends AbstractUIObject {
     }
 
     public abstract void inputSearchText(String text);
+
+    public abstract void clickBagButton();
 }

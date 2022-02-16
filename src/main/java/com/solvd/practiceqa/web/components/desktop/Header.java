@@ -26,15 +26,8 @@ public class Header extends HeaderBase {
         searchField.type(text);
     }
 
-    public ExtendedWebElement getLogo() {
-        return logo;
-    }
-
-    public ExtendedWebElement getSearchField() {
-        return searchField;
-    }
-
-    public ExtendedWebElement getBagButton() {
-        return bagButton;
+    @Override
+    public void clickBagButton() {
+        bagButton.click();
     }
 }

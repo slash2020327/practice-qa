@@ -3,7 +3,6 @@ package com.solvd.practiceqa.web.pages.android;
 import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.solvd.practiceqa.web.components.android.AndroidHeader;
-import com.solvd.practiceqa.web.components.desktop.Header;
 import com.solvd.practiceqa.web.pages.LoginPageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -40,21 +39,5 @@ public class AndroidLoginPage extends LoginPageBase {
     @Override
     public void clickLoginButton() {
         loginButton.click();
-    }
-
-    public AndroidHeader getHeader() {
-        return header;
-    }
-
-    public ExtendedWebElement getEmailField() {
-        return emailField;
-    }
-
-    public ExtendedWebElement getPasswordField() {
-        return passwordField;
-    }
-
-    public ExtendedWebElement getLoginButton() {
-        return loginButton;
     }
 }

@@ -34,26 +34,9 @@ public class CartPage extends CartPageBase {
 
     @Override
     public String getLastProductTitle() {
-        List<ExtendedWebElement> webTitles = products.stream()
-                .map(CartProduct::getProductTitle)
+        List<String> webTitles = products.stream()
+                .map(CartProduct::getProductTitleText)
                 .collect(Collectors.toList());
-        ExtendedWebElement lastProductTitle = webTitles.get(webTitles.size() - 1);
-        return lastProductTitle.getText();
-    }
-
-    public Header getHeader() {
-        return header;
-    }
-
-    public ExtendedWebElement getCheckoutButton() {
-        return checkoutButton;
-    }
-
-    public ExtendedWebElement getPageTitle() {
-        return title;
-    }
-
-    public List<CartProduct> getProducts() {
-        return products;
+        return webTitles.get(webTitles.size() - 1);
     }
 }

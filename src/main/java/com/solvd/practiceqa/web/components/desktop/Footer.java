@@ -16,8 +16,4 @@ public class Footer extends FooterBase {
     public Footer(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
-
-    public List<ExtendedWebElement> getPrivacyLinks() {
-        return privacyLinks;
-    }
 }
