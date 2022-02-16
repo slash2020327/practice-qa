@@ -4,6 +4,7 @@ import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.solvd.practiceqa.web.components.desktop.Header;
+import com.solvd.practiceqa.web.pages.CartPageBase;
 import com.solvd.practiceqa.web.pages.ProductPageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -31,6 +32,20 @@ public class ProductPage extends ProductPageBase {
     public ProductPage(WebDriver driver) {
         super(driver);
         setPageAbsoluteURL(R.CONFIG.get("base_url") + "/ultraboost-22-shoes/GX5592.html");
+    }
+
+    @Override
+    public String getProductTitleText() {
+        return title.getText();
+    }
+
+    @Override
+    public CartPageBase addProductToBag(String size) {
+        chooseSize(size);
+        addToBagButton.click();
+        popupCloseButton.click();
+        header.getBagButton().click();
+        return new CartPage(this.getDriver());
     }
 
     @Override

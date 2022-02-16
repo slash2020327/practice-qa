@@ -9,4 +9,6 @@ public abstract class HeaderBase extends AbstractUIObject {
     public HeaderBase(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
+
+    public abstract void inputSearchText(String text);
 }
