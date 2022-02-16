@@ -1,6 +1,9 @@
 package com.solvd.practiceqa.web.pages.android;
 
+import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.solvd.practiceqa.web.components.android.AndroidHeader;
 import com.solvd.practiceqa.web.components.desktop.Header;
 import com.solvd.practiceqa.web.pages.SearchPageBase;
 import com.solvd.practiceqa.web.pages.desktop.HomePage;
@@ -11,10 +14,11 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = SearchPageBase.class)
 public class AndroidSearchPage extends SearchPageBase {
 
     @FindBy(xpath = "//div[contains(@class, 'header-mobile')]")
-    protected Header header;
+    protected AndroidHeader header;
 
     @FindBy(xpath = "//div[contains(@class,'filters-icon')]")
     private ExtendedWebElement filterIcon;
@@ -33,12 +37,13 @@ public class AndroidSearchPage extends SearchPageBase {
 
     public AndroidSearchPage(WebDriver driver) {
         super(driver);
+        setPageAbsoluteURL(R.CONFIG.get("base_url") + "/women-new_arrivals");
     }
 
     @Override
     public void chooseOption(String title) {
         ExtendedWebElement option = sortingOptions.stream()
-                .filter(webElement -> webElement.getText().equals(title))
+                .filter(webElement -> webElement.getText().equalsIgnoreCase(title))
                 .findFirst()
                 .get();
         option.click();
@@ -75,13 +80,10 @@ public class AndroidSearchPage extends SearchPageBase {
 
     @Override
     public void searchInput(String text) {
-        HomePage homePage = new HomePage(driver);
-        homePage.open();
-        ExtendedWebElement searchField = homePage.getHeader().getSearchField();
-        searchField.type(text);
+        header.inputSearchText(text);
     }
 
-    public Header getHeader() {
+    public AndroidHeader getHeader() {
         return header;
     }
 

@@ -21,6 +21,11 @@ public class Header extends HeaderBase {
         super(driver, searchContext);
     }
 
+    @Override
+    public void inputSearchText(String text) {
+        searchField.type(text);
+    }
+
     public ExtendedWebElement getLogo() {
         return logo;
     }

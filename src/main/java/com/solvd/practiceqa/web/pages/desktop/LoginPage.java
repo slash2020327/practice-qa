@@ -28,6 +28,21 @@ public class LoginPage extends LoginPageBase {
         setPageAbsoluteURL(R.CONFIG.get("base_url") + "/account-login");
     }
 
+    @Override
+    public void typeEmail(String email) {
+        emailField.type(email);
+    }
+
+    @Override
+    public void typePassword(String password) {
+        passwordField.type(password);
+    }
+
+    @Override
+    public void clickLoginButton() {
+        loginButton.click();
+    }
+
     public Header getHeader() {
         return header;
     }

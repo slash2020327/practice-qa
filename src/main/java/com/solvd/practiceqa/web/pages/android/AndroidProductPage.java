@@ -1,17 +1,21 @@
 package com.solvd.practiceqa.web.pages.android;
 
+import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.solvd.practiceqa.web.components.desktop.Header;
+import com.solvd.practiceqa.web.components.android.AndroidHeader;
+import com.solvd.practiceqa.web.pages.CartPageBase;
 import com.solvd.practiceqa.web.pages.ProductPageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductPageBase.class)
 public class AndroidProductPage extends ProductPageBase {
 
     @FindBy(xpath = "//div[contains(@class, 'header-mobile')]")
-    protected Header header;
+    protected AndroidHeader header;
 
     @FindBy(xpath = "//h1[contains(@class,'heading')]/span")
     private ExtendedWebElement title;
@@ -19,7 +23,7 @@ public class AndroidProductPage extends ProductPageBase {
     @FindBy(xpath = "//button[contains(@class, 'size')]")
     private List<ExtendedWebElement> sizeGrid;
 
-    @FindBy(xpath = "//button[@title='Available sizes']")
+    @FindBy(xpath = "//button[@title='Add To Bag']")
     private ExtendedWebElement addToBagButton;
 
     @FindBy(xpath = "//button[@class='gl-modal__close']")
@@ -27,6 +31,7 @@ public class AndroidProductPage extends ProductPageBase {
 
     public AndroidProductPage(WebDriver driver) {
         super(driver);
+        setPageAbsoluteURL(R.CONFIG.get("base_url") + "/ultraboost-22-shoes/GX5592.html");
     }
 
     @Override
@@ -39,7 +44,21 @@ public class AndroidProductPage extends ProductPageBase {
         chosenSize.click();
     }
 
-    public Header getHeader() {
+    @Override
+    public String getProductTitleText() {
+        return title.getText();
+    }
+
+    @Override
+    public CartPageBase addProductToBag(String size) {
+        chooseSize(size);
+        addToBagButton.click();
+        popupCloseButton.click();
+        header.getBagButton().click();
+        return new AndroidCartPage(this.getDriver());
+    }
+
+    public AndroidHeader getHeader() {
         return header;
     }
 

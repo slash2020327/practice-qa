@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = CartPageBase.class)
 public class CartPage extends CartPageBase {
@@ -29,6 +30,15 @@ public class CartPage extends CartPageBase {
     public CartPage(WebDriver driver) {
         super(driver);
         setPageAbsoluteURL(R.CONFIG.get("base_url") + "/cart");
+    }
+
+    @Override
+    public String getLastProductTitle() {
+        List<ExtendedWebElement> webTitles = products.stream()
+                .map(CartProduct::getProductTitle)
+                .collect(Collectors.toList());
+        ExtendedWebElement lastProductTitle = webTitles.get(webTitles.size() - 1);
+        return lastProductTitle.getText();
     }
 
     public Header getHeader() {

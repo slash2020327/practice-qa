@@ -1,7 +1,7 @@
 package com.solvd.practiceqa;
 
-import com.solvd.practiceqa.web.pages.desktop.AccountPage;
-import com.solvd.practiceqa.web.service.LoginService;
+import com.solvd.practiceqa.web.pages.AccountPageBase;
+import com.solvd.practiceqa.web.pages.LoginPageBase;
 import com.solvd.practiceqa.web.service.TestDataService;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -9,18 +9,23 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends AbstractTest {
 
-    private LoginService loginService;
+    private static LoginPageBase loginPage;
+    private static AccountPageBase accountPage;
 
     @BeforeClass
-    public void before() {
-        loginService = new LoginService(getDriver());
+    public void beforeLogin() {
+        loginPage = initPage(getDriver(), LoginPageBase.class);
+        accountPage = initPage(getDriver(), AccountPageBase.class);
     }
 
     @Test
     public void loginTest() {
         String email = TestDataService.getValue("email");
         String pass = TestDataService.getValue("password");
-        AccountPage accountPage = loginService.login(email, pass);
+        loginPage.open();
+        loginPage.typeEmail(email);
+        loginPage.typePassword(pass);
+        loginPage.clickLoginButton();
         Assert.assertTrue(accountPage.isPageOpened(), "Account page is not opened");
     }
 }

@@ -10,4 +10,8 @@ public abstract class ProductPageBase extends AbstractPage {
     }
 
     public abstract void chooseSize(String size);
+
+    public abstract String getProductTitleText();
+
+    public abstract CartPageBase addProductToBag(String size);
 }
