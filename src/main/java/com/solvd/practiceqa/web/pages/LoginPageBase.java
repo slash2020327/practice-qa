@@ -13,5 +13,5 @@ public abstract class LoginPageBase extends AbstractPage {
 
     public abstract void typePassword(String password);
 
-    public abstract void clickLoginButton();
+    public abstract AccountPageBase clickLoginButton();
 }

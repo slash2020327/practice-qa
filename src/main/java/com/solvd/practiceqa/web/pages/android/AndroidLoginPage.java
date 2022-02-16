@@ -37,7 +37,8 @@ public class AndroidLoginPage extends LoginPageBase {
     }
 
     @Override
-    public void clickLoginButton() {
+    public AndroidAccountPage clickLoginButton() {
         loginButton.click();
+        return new AndroidAccountPage(getDriver());
     }
 }

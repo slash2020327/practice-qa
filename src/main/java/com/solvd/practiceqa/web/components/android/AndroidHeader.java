@@ -2,6 +2,7 @@ package com.solvd.practiceqa.web.components.android;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.solvd.practiceqa.web.components.HeaderBase;
+import com.solvd.practiceqa.web.pages.android.AndroidSearchPage;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -26,10 +27,11 @@ public class AndroidHeader extends HeaderBase {
     }
 
     @Override
-    public void inputSearchText(String text) {
+    public AndroidSearchPage inputSearchText(String text) {
         searchIcon.click();
         searchField.type(text);
         searchField.sendKeys(Keys.ENTER);
+        return new AndroidSearchPage(getDriver());
     }
 
     @Override
