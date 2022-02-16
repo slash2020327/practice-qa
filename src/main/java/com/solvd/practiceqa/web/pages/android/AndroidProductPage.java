@@ -54,27 +54,7 @@ public class AndroidProductPage extends ProductPageBase {
         chooseSize(size);
         addToBagButton.click();
         popupCloseButton.click();
-        header.getBagButton().click();
-        return new AndroidCartPage(this.getDriver());
-    }
-
-    public AndroidHeader getHeader() {
-        return header;
-    }
-
-    public ExtendedWebElement getPageTitle() {
-        return title;
-    }
-
-    public List<ExtendedWebElement> getSizeGrid() {
-        return sizeGrid;
-    }
-
-    public ExtendedWebElement getAddToBagButton() {
-        return addToBagButton;
-    }
-
-    public ExtendedWebElement getPopupCloseButton() {
-        return popupCloseButton;
+        header.clickBagButton();
+        return new AndroidCartPage(getDriver());
     }
 }

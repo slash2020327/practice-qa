@@ -17,12 +17,4 @@ public class AndroidHomePage extends HomePageBase {
     public AndroidHomePage(WebDriver driver) {
         super(driver);
     }
-
-    public AndroidHeader getHeader() {
-        return header;
-    }
-
-    public AndroidFooter getFooter() {
-        return footer;
-    }
 }

@@ -6,7 +6,6 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.solvd.practiceqa.web.components.desktop.Header;
 import com.solvd.practiceqa.web.pages.SearchPageBase;
 import com.solvd.practiceqa.web.service.TestDataService;
-import com.solvd.practiceqa.web.util.WaitUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -46,18 +45,16 @@ public class SearchPage extends SearchPageBase {
     }
 
     @Override
-    public List<ExtendedWebElement> sortSearch() {
+    public void sortSearch() {
         open();
         sortButton.click();
         String sortOption = TestDataService.getValue("sorting_option");
         chooseOption(sortOption);
-        return getProductPrice();
     }
 
     @Override
     public List<Integer> getResultPrices() {
-        List<ExtendedWebElement> prices = sortSearch();
-        return prices.stream()
+        return productPrice.stream()
                 .map(ExtendedWebElement::getText)
                 .map(text -> text.substring(1).replaceAll("[,]", ""))
                 .map(Integer::parseInt)
@@ -66,7 +63,7 @@ public class SearchPage extends SearchPageBase {
 
     @Override
     public List<String> getResultTitles() {
-        List<ExtendedWebElement> titles = getProductTitles();
+        List<ExtendedWebElement> titles = productTitles;
         return titles.stream()
                 .map(ExtendedWebElement::getText)
                 .map(String::toLowerCase)
@@ -75,29 +72,6 @@ public class SearchPage extends SearchPageBase {
 
     @Override
     public void searchInput(String text) {
-        HomePage homePage = new HomePage(driver);
-        homePage.open();
-        ExtendedWebElement searchField = homePage.getHeader().getSearchField();
-        searchField.type(text);
-    }
-
-    public Header getHeader() {
-        return header;
-    }
-
-    public ExtendedWebElement getSortButton() {
-        return sortButton;
-    }
-
-    public List<ExtendedWebElement> getSortingOptions() {
-        return sortingOptions;
-    }
-
-    public List<ExtendedWebElement> getProductPrice() {
-        return productPrice;
-    }
-
-    public List<ExtendedWebElement> getProductTitles() {
-        return productTitles;
+        header.inputSearchText(text);
     }
 }

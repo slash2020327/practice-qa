@@ -42,20 +42,4 @@ public class LoginPage extends LoginPageBase {
     public void clickLoginButton() {
         loginButton.click();
     }
-
-    public Header getHeader() {
-        return header;
-    }
-
-    public ExtendedWebElement getEmailField() {
-        return emailField;
-    }
-
-    public ExtendedWebElement getPasswordField() {
-        return passwordField;
-    }
-
-    public ExtendedWebElement getLoginButton() {
-        return loginButton;
-    }
 }

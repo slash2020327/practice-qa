@@ -21,12 +21,4 @@ public class HomePage extends HomePageBase {
         super(driver);
         setPageAbsoluteURL(R.CONFIG.get("base_url"));
     }
-
-    public Header getHeader() {
-        return header;
-    }
-
-    public Footer getFooter() {
-        return footer;
-    }
 }

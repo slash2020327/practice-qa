@@ -16,8 +16,4 @@ public class AndroidFooter extends FooterBase {
     public AndroidFooter(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
-
-    public List<ExtendedWebElement> getPrivacyLinks() {
-        return privacyLinks;
-    }
 }

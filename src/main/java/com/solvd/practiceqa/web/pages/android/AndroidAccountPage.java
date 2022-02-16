@@ -26,16 +26,4 @@ public class AndroidAccountPage extends AccountPageBase {
         super(driver);
         setPageAbsoluteURL(R.CONFIG.get("base_url") + "/my-account");
     }
-
-    public AndroidHeader getHeader() {
-        return header;
-    }
-
-    public ExtendedWebElement getPageTitle() {
-        return title;
-    }
-
-    public List<ExtendedWebElement> getAccountLinks() {
-        return accountLinks;
-    }
 }

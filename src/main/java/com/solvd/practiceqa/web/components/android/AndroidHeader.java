@@ -32,15 +32,8 @@ public class AndroidHeader extends HeaderBase {
         searchField.sendKeys(Keys.ENTER);
     }
 
-    public ExtendedWebElement getLogo() {
-        return logo;
-    }
-
-    public ExtendedWebElement getSearchField() {
-        return searchField;
-    }
-
-    public ExtendedWebElement getBagButton() {
-        return bagButton;
+    @Override
+    public void clickBagButton() {
+        bagButton.click();
     }
 }

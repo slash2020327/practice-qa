@@ -1,6 +1,5 @@
 package com.solvd.practiceqa.web.pages;
 
-import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
@@ -14,7 +13,7 @@ public abstract class SearchPageBase extends AbstractPage {
 
     public abstract void chooseOption(String title);
 
-    public abstract List<ExtendedWebElement> sortSearch();
+    public abstract void sortSearch();
 
     public abstract List<Integer> getResultPrices();
 

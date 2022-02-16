@@ -22,15 +22,8 @@ public class AndroidCartProduct extends CartProductBase {
         super(driver, searchContext);
     }
 
-    public ExtendedWebElement getProductTitle() {
-        return productTitle;
-    }
-
-    public Select getProductAmount() {
-        return productAmount;
-    }
-
-    public ExtendedWebElement getDeleteButton() {
-        return deleteButton;
+    @Override
+    public String getProductTitleText() {
+        return productTitle.getText();
     }
 }

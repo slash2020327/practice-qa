@@ -17,12 +17,4 @@ public abstract class AdidasPage extends AbstractPage {
     public AdidasPage(WebDriver driver) {
         super(driver);
     }
-
-    public Header getHeader() {
-        return header;
-    }
-
-    public Footer getFooter() {
-        return footer;
-    }
 }
