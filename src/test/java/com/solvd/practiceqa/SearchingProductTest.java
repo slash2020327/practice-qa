@@ -1,6 +1,6 @@
 package com.solvd.practiceqa;
 
-import com.solvd.practiceqa.web.pages.ProductSearchingPage;
+import com.solvd.practiceqa.web.pages.SearchPageBase;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -11,17 +11,18 @@ import java.util.List;
 
 public class SearchingProductTest extends AbstractTest {
 
-    private static ProductSearchingPage productSearchingPage;
+    private static SearchPageBase searchPage;
 
     @BeforeClass
     public void beforeSearching() {
-        productSearchingPage = new ProductSearchingPage(getDriver());
+        searchPage = initPage(getDriver(), SearchPageBase.class);
     }
 
     @Test
     public void sortingPriceTest() {
-        productSearchingPage.sortSearch();
-        List<Integer> intPrices = productSearchingPage.getResultPrices();
+        searchPage.open();
+        searchPage.sortSearch();
+        List<Integer> intPrices = searchPage.getResultPrices();
         for (int i = 1; i < intPrices.size(); i++) {
             Assert.assertTrue(intPrices.get(i) <= intPrices.get(i - 1), "Sorting isn't working right");
         }
@@ -35,8 +36,9 @@ public class SearchingProductTest extends AbstractTest {
 
     @Test(dataProvider = "searchDataProvider")
     public void searchTest(String searchText) {
-        productSearchingPage.searchInput(searchText);
-        List<String> resultTitles = productSearchingPage.getResultTitles();
+        searchPage.open();
+        searchPage.searchInput(searchText);
+        List<String> resultTitles = searchPage.getResultTitles();
         SoftAssert sa = new SoftAssert();
         resultTitles.
                 forEach(resultTitle -> sa.assertTrue(resultTitle.contains(searchText), "Searching exception"));

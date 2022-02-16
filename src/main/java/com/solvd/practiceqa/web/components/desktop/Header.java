@@ -1,12 +1,13 @@
-package com.solvd.practiceqa.web.components;
+package com.solvd.practiceqa.web.components.desktop;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.qaprosoft.carina.core.gui.AbstractUIObject;
+import com.solvd.practiceqa.web.components.HeaderBase;
+import com.solvd.practiceqa.web.pages.desktop.SearchPage;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class Header extends AbstractUIObject {
+public class Header extends HeaderBase {
 
     @FindBy(xpath = ".//a[contains(@class,'logo')]")
     private ExtendedWebElement logo;
@@ -21,15 +22,14 @@ public class Header extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public ExtendedWebElement getLogo() {
-        return logo;
+    @Override
+    public SearchPage inputSearchText(String text) {
+        searchField.type(text);
+        return new SearchPage(getDriver());
     }
 
-    public ExtendedWebElement getSearchField() {
-        return searchField;
-    }
-
-    public ExtendedWebElement getBagButton() {
-        return bagButton;
+    @Override
+    public void clickBagButton() {
+        bagButton.click();
     }
 }

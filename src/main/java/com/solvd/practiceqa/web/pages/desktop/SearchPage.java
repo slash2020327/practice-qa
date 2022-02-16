@@ -1,16 +1,22 @@
-package com.solvd.practiceqa.web.pages;
+package com.solvd.practiceqa.web.pages.desktop;
 
 import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.solvd.practiceqa.web.components.desktop.Header;
+import com.solvd.practiceqa.web.pages.SearchPageBase;
 import com.solvd.practiceqa.web.service.TestDataService;
-import com.solvd.practiceqa.web.util.WaitUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductSearchingPage extends AdidasPage {
+@DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = SearchPageBase.class)
+public class SearchPage extends SearchPageBase {
+
+    @FindBy(xpath = "//div[contains(@class, 'header-bottom')]")
+    protected Header header;
 
     @FindBy(xpath = "//div[contains(@class,'controllers')]//button[contains(@class,'select')]//span[contains(@class,'text')]")
     private ExtendedWebElement sortButton;
@@ -24,65 +30,51 @@ public class ProductSearchingPage extends AdidasPage {
     @FindBy(xpath = "//p[contains(@class,'product-card') and contains(@class,'title')]")
     private List<ExtendedWebElement> productTitles;
 
-    public ProductSearchingPage(WebDriver driver) {
+    public SearchPage(WebDriver driver) {
         super(driver);
         setPageAbsoluteURL(R.CONFIG.get("base_url") + "/women-new_arrivals");
     }
 
-    public void chooseOption(String title) {
+    @Override
+    public SearchPage chooseOption(String title) {
         ExtendedWebElement option = sortingOptions.stream()
                 .filter(webElement -> webElement.getText().equals(title))
                 .findFirst()
                 .get();
         option.click();
+        return this;
     }
 
-    public List<ExtendedWebElement> sortSearch() {
+    @Override
+    public SearchPage sortSearch() {
         open();
         sortButton.click();
         String sortOption = TestDataService.getValue("sorting_option");
         chooseOption(sortOption);
-        WaitUtil.sleep(5);
-        return getProductPrice();
+        return this;
     }
 
+    @Override
     public List<Integer> getResultPrices() {
-        List<ExtendedWebElement> prices = sortSearch();
-        return prices.stream()
+        return productPrice.stream()
                 .map(ExtendedWebElement::getText)
                 .map(text -> text.substring(1).replaceAll("[,]", ""))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
+    @Override
     public List<String> getResultTitles() {
-        List<ExtendedWebElement> titles = getProductTitles();
+        List<ExtendedWebElement> titles = productTitles;
         return titles.stream()
                 .map(ExtendedWebElement::getText)
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
     }
 
-    public void searchInput(String text) {
-        HomePage homePage = new HomePage(driver);
-        homePage.open();
-        ExtendedWebElement searchField = homePage.getHeader().getSearchField();
-        searchField.type(text);
-    }
-
-    public ExtendedWebElement getSortButton() {
-        return sortButton;
-    }
-
-    public List<ExtendedWebElement> getSortingOptions() {
-        return sortingOptions;
-    }
-
-    public List<ExtendedWebElement> getProductPrice() {
-        return productPrice;
-    }
-
-    public List<ExtendedWebElement> getProductTitles() {
-        return productTitles;
+    @Override
+    public SearchPage searchInput(String text) {
+        header.inputSearchText(text);
+        return this;
     }
 }
