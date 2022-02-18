@@ -1,18 +1,20 @@
-package com.solvd.practiceqa.web.pages.android;
+package com.solvd.practiceqa.web.pages.ios;
 
 import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.solvd.practiceqa.web.components.android.AndroidHeader;
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.annotations.Predicate;
+import com.solvd.practiceqa.web.components.ios.IosHeader;
 import com.solvd.practiceqa.web.pages.LoginPageBase;
+import com.solvd.practiceqa.web.pages.SearchPageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
-public class AndroidLoginPage extends LoginPageBase {
+@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = LoginPageBase.class)
+public class IosLoginPage extends LoginPageBase {
 
     @FindBy(xpath = "//div[contains(@class, 'header-mobile')]")
-    protected AndroidHeader header;
+    protected IosHeader header;
 
     @FindBy(xpath = "//input[@id='login-email']")
     private ExtendedWebElement emailField;
@@ -23,26 +25,26 @@ public class AndroidLoginPage extends LoginPageBase {
     @FindBy(xpath = "//button[@type='submit']")
     private ExtendedWebElement loginButton;
 
-    public AndroidLoginPage(WebDriver driver) {
+    public IosLoginPage(WebDriver driver) {
         super(driver);
         setPageAbsoluteURL(R.CONFIG.get("base_url") + "/account-login");
     }
 
     @Override
-    public AndroidLoginPage typeEmail(String email) {
+    public IosLoginPage typeEmail(String email) {
         emailField.type(email);
         return this;
     }
 
     @Override
-    public AndroidLoginPage typePassword(String password) {
+    public IosLoginPage typePassword(String password) {
         passwordField.type(password);
         return this;
     }
 
     @Override
-    public AndroidAccountPage clickLoginButton() {
+    public IosAccountPage clickLoginButton() {
         loginButton.click();
-        return new AndroidAccountPage(getDriver());
+        return new IosAccountPage(getDriver());
     }
 }
