@@ -1,11 +1,6 @@
 package com.solvd.practiceqa;
 
-import com.solvd.practiceqa.web.pages.ProductSearchingPage;
-import com.solvd.practiceqa.web.util.DriverUtil;
-import com.solvd.practiceqa.web.util.WaitUtil;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import com.solvd.practiceqa.web.pages.SearchPageBase;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -16,24 +11,18 @@ import java.util.List;
 
 public class SearchingProductTest extends AbstractTest {
 
-    private static ProductSearchingPage productSearchingPage;
+    private static SearchPageBase searchPage;
 
     @BeforeClass
     public void beforeSearching() {
-        WebDriver driver = DriverUtil.getDriver("search");
-        ChromeOptions opt = new ChromeOptions();
-        opt.addArguments("incognito");
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, opt);
-        DriverUtil.getOptionsDriver("incognito", capabilities);
-        productSearchingPage = new ProductSearchingPage(driver);
+        searchPage = initPage(getDriver(), SearchPageBase.class);
     }
 
     @Test
     public void sortingPriceTest() {
-        WebDriver incDriver = DriverUtil.getDriver("incognito");
-        productSearchingPage.setDriver(incDriver);
-        List<Integer> intPrices = productSearchingPage.getResultPrices();
+        searchPage.open();
+        searchPage.sortSearch();
+        List<Integer> intPrices = searchPage.getResultPrices();
         for (int i = 1; i < intPrices.size(); i++) {
             Assert.assertTrue(intPrices.get(i) <= intPrices.get(i - 1), "Sorting isn't working right");
         }
@@ -47,9 +36,9 @@ public class SearchingProductTest extends AbstractTest {
 
     @Test(dataProvider = "searchDataProvider")
     public void searchTest(String searchText) {
-        productSearchingPage.searchInput(searchText);
-        WaitUtil.sleep(5);
-        List<String> resultTitles = productSearchingPage.getResultTitles();
+        searchPage.open();
+        searchPage.searchInput(searchText);
+        List<String> resultTitles = searchPage.getResultTitles();
         SoftAssert sa = new SoftAssert();
         resultTitles.
                 forEach(resultTitle -> sa.assertTrue(resultTitle.contains(searchText), "Searching exception"));

@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.invoke.MethodHandles;
-import java.time.Duration;
 
 public class WaitUtil {
 
@@ -18,7 +17,7 @@ public class WaitUtil {
     private static final Long explicitTimeout = Long.parseLong(ConfigService.getValue(ConfigData.EXPLICIT_TIMEOUT));
 
     public static void waitVisibility(WebDriver driver, WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(explicitTimeout));
+        WebDriverWait wait = new WebDriverWait(driver, explicitTimeout);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
