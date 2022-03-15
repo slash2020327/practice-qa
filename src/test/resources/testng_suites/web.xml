@@ -1,5 +1,14 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="TA practice" parallel="classes">
+
+    <parameter name="suiteOwner" value="qpsdemo"/>
+    <parameter name="jenkinsJobName" value="webTest"/>
+    <parameter name="jenkinsJobType" value="web"/>
+    <parameter name="jenkinsEmail" value="test@qaprosoft.com"/>
+    <parameter name="jenkinsEnvironments" value="DEMO"/>
+    <parameter name="jenkinsRegressionPipeline" value="Web-Regression"/>
+    <parameter name="jenkinsRegressionMatrix" value="browser:chrome; browser:firefox"/>
+
     <test name="Adidas Test">
         <classes>
             <class name="com.solvd.practiceqa.LoginTest"/>
