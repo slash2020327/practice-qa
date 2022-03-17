@@ -25,7 +25,10 @@ public class ShoppingCartTest extends AbstractTest implements IAbstractTest {
         String productTitle = productPage.getProductTitleText();
         cartPage = productPage.addProductToBag(TestDataService.getValue("size"));
         Assert.assertTrue(cartPage.isPageOpened(), "Cart isn't opened");
-        String cartTitle = cartPage.getLastProductTitle();
-        Assert.assertTrue(cartTitle.contains(productTitle), "The product isn't added to cart");
+        Runnable cartCheck = (() -> {
+            String cartTitle = cartPage.getLastProductTitle();
+            Assert.assertTrue(cartTitle.contains(productTitle), "The product isn't added to cart");
+        });
+        cartCheck.run();
     }
 }
