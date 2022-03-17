@@ -22,7 +22,7 @@ public class ConfigService {
         FileInputStream fis;
         Properties property = new Properties();
         try {
-            fis = new FileInputStream("src/main/resources/_config.properties");
+            fis = new FileInputStream("src/main/resources/config.properties");
             property.load(fis);
             Set<String> configPropertyNames = property.stringPropertyNames();
             configPropertyNames

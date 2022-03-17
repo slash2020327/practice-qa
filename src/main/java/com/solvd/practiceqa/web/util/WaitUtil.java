@@ -23,7 +23,7 @@ public class WaitUtil {
 
     public static void sleep(int seconds) {
         try {
-            Thread.sleep(seconds * 1000L);
+            Thread.sleep(seconds);
         } catch (InterruptedException e) {
             LOGGER.warn("Thread was interrupted");
         }
