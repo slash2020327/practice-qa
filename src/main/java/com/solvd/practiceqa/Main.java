@@ -1,11 +1,11 @@
 package com.solvd.practiceqa;
 
-import com.solvd.practiceqa.threads.ConnectionPool;
 import com.solvd.practiceqa.threads.ThreadTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.invoke.MethodHandles;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -19,14 +19,22 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     public static void main(String[] args) {
-        ConnectionPool.createInstance(5);
-        //        IntStream.range(0, 7)
-        //                .boxed()
-        //                .forEach(index -> {
-        //                    ThreadTest threadTest = new ThreadTest();
-        //                    threadTest.start();
-        //                    threadTest.sleep(500);
-        //                });
+
+        List<Thread> threads = new ArrayList<>();
+        IntStream.range(0, 10).boxed()
+                .forEach(index -> {
+                    ThreadTest threadTest = new ThreadTest();
+                    threadTest.start();
+                    threads.add(threadTest);
+                });
+
+        threads.forEach(thread -> {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                LOGGER.warn("Thread was interrupted");
+            }
+        });
 
         ExecutorService executorService = Executors.newFixedThreadPool(5);
         ThreadTest runnableCheck = new ThreadTest();

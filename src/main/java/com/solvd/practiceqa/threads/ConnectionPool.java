@@ -1,56 +1,57 @@
 package com.solvd.practiceqa.threads;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.IntStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.lang.invoke.MethodHandles;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ConnectionPool {
 
-    private static volatile ConnectionPool instance;
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    private static volatile List<Connection> freeConnections = new CopyOnWriteArrayList<>();
-    private static volatile List<Connection> waitConnections = new CopyOnWriteArrayList<>();
-    private static volatile List<Connection> usedConnections = new CopyOnWriteArrayList<>();
+    private volatile static ConnectionPool instance;
+    private volatile static int freeConnections;
+    private final Queue<Connection> activeConnections;
 
-    public static ConnectionPool createInstance(Integer numberOfConnections) {
+    private ConnectionPool(int sizeOfPool) {
+        freeConnections = sizeOfPool;
+        this.activeConnections = new ConcurrentLinkedQueue<>();
+    }
+
+    public Connection getConnection() {
+        synchronized (activeConnections) {
+            if (freeConnections != 0) {
+                this.activeConnections.offer(new Connection(freeConnections));
+                freeConnections--;
+            }
+            while (activeConnections.isEmpty()) {
+                try {
+                    activeConnections.wait();
+                } catch (InterruptedException e) {
+                    LOGGER.warn("Can't wait for free Connection");
+                }
+            }
+            return activeConnections.poll();
+        }
+    }
+
+    public void releaseConnection(Connection task) {
+        synchronized (this.activeConnections) {
+            this.activeConnections.offer(task);
+            this.activeConnections.notify();
+        }
+    }
+
+    public static ConnectionPool getInstance(int sizeOfPool) {
         if (instance == null) {
-            instance = new ConnectionPool(numberOfConnections);
+            synchronized (ConnectionPool.class) {
+                if (instance == null) {
+                    instance = new ConnectionPool(sizeOfPool);
+                }
+            }
         }
         return instance;
-    }
-
-    private ConnectionPool(Integer numberOfConnections) {
-        synchronized (ConnectionPool.class) {
-            createConnection(numberOfConnections);
-        }
-    }
-
-    private void createConnection(Integer numberOfConnections) {
-        IntStream.range(0, numberOfConnections)
-                .forEach(index -> freeConnections.add(new Connection(index)));
-        IntStream.range(0, 2)
-                .forEach(index -> waitConnections.add(new Connection(index)));
-    }
-
-    public static Connection getConnection() {
-        Connection connection = null;
-        synchronized (ConnectionPool.class) {
-            if (freeConnections != null) {
-                connection = freeConnections
-                        .remove(freeConnections.size() - 1);
-                usedConnections.add(connection);
-            } else if (waitConnections.size() <= 2) {
-                connection = new Connection(waitConnections.size());
-                waitConnections.add(connection);
-            }
-            return connection;
-        }
-    }
-
-    public static void releaseConnection(Connection connection) {
-        synchronized (ConnectionPool.class) {
-            freeConnections.add(connection);
-            usedConnections.remove(connection);
-        }
     }
 }
