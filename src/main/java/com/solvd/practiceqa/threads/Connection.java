@@ -9,7 +9,7 @@ public class Connection {
     public static final Logger LOGGER = LogManager.getLogger(Connection.class);
 
     public Connection(Integer name) {
-        this.name = name;
+        this.name = name + 1;
     }
 
     public void createConnection() {

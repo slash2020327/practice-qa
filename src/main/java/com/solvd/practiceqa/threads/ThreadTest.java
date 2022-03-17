@@ -11,11 +11,10 @@ public class ThreadTest extends Thread{
 
     @Override
     public void run() {
-        ConnectionPool connectionPool = ConnectionPool.createInstance(5);
-        Connection connection = connectionPool.getConnection();
+        Connection connection = ConnectionPool.getConnection();
         connection.createConnection();
         connection.readConnection();
-        connectionPool.releaseConnection(connection);
+        ConnectionPool.releaseConnection(connection);
     }
 
     public void sleep(int seconds) {

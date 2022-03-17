@@ -8,9 +8,9 @@ public class ConnectionPool {
 
     private static volatile ConnectionPool instance;
 
-    private volatile List<Connection> freeConnections = new CopyOnWriteArrayList<>();
-    private volatile List<Connection> waitConnections = new CopyOnWriteArrayList<>();
-    private volatile List<Connection> usedConnections = new CopyOnWriteArrayList<>();
+    private static volatile List<Connection> freeConnections = new CopyOnWriteArrayList<>();
+    private static volatile List<Connection> waitConnections = new CopyOnWriteArrayList<>();
+    private static volatile List<Connection> usedConnections = new CopyOnWriteArrayList<>();
 
     public static ConnectionPool createInstance(Integer numberOfConnections) {
         if (instance == null) {
@@ -25,14 +25,14 @@ public class ConnectionPool {
         }
     }
 
-    public void createConnection(Integer numberOfConnections) {
+    private void createConnection(Integer numberOfConnections) {
         IntStream.range(0, numberOfConnections)
                 .forEach(index -> freeConnections.add(new Connection(index)));
         IntStream.range(0, 2)
                 .forEach(index -> waitConnections.add(new Connection(index)));
     }
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         Connection connection = null;
         synchronized (ConnectionPool.class) {
             if (freeConnections != null) {
@@ -47,7 +47,7 @@ public class ConnectionPool {
         }
     }
 
-    public void releaseConnection(Connection connection) {
+    public static void releaseConnection(Connection connection) {
         synchronized (ConnectionPool.class) {
             freeConnections.add(connection);
             usedConnections.remove(connection);
