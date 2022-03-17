@@ -1,11 +1,11 @@
 package com.solvd.practiceqa;
 
 import com.solvd.practiceqa.web.pages.SearchPageBase;
+import com.solvd.practiceqa.web.service.VerifyTitle;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
@@ -39,9 +39,7 @@ public class SearchingProductTest extends AbstractTest {
         searchPage.open();
         searchPage.searchInput(searchText);
         List<String> resultTitles = searchPage.getResultTitles();
-        SoftAssert sa = new SoftAssert();
-        resultTitles.
-                forEach(resultTitle -> sa.assertTrue(resultTitle.contains(searchText), "Searching exception"));
-        sa.assertAll();
+        VerifyTitle vt = new VerifyTitle();
+        vt.apply(resultTitles, searchText);
     }
 }
