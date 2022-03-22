@@ -1,7 +1,5 @@
 package com.solvd.practiceqa.web.service;
 
-import com.qaprosoft.carina.core.foundation.commons.SpecialKeywords;
-import com.qaprosoft.carina.core.foundation.crypto.CryptoTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 public class TestDataService {
 
@@ -49,18 +46,6 @@ public class TestDataService {
             }
         }
         return value;
-    }
-
-    public static String getEncryptedValue(String property) {
-        CryptoTool cryptoTool = new CryptoTool("src/main/resources/crypto.key");
-        Pattern CRYPTO_PATTERN = Pattern.compile(SpecialKeywords.CRYPT);
-        String value = null;
-        for (String key : testData.keySet()) {
-            if (key.equals(property)) {
-                value = testData.get(key);
-            }
-        }
-        return cryptoTool.decryptByPattern(value, CRYPTO_PATTERN);
     }
 
     public static void createInstance() {

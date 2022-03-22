@@ -1,5 +1,6 @@
 package com.solvd.practiceqa;
 
+import com.solvd.practiceqa.util.CryptoUtil;
 import com.solvd.practiceqa.web.pages.AccountPageBase;
 import com.solvd.practiceqa.web.service.LoginService;
 import com.solvd.practiceqa.web.service.TestDataService;
@@ -18,8 +19,10 @@ public class LoginTest extends AbstractTest {
 
     @Test
     public void loginTest() {
-        String email = TestDataService.getEncryptedValue("email");
-        String pass = TestDataService.getEncryptedValue("password");
+        String decryptedEmail = TestDataService.getValue("email");
+        String decryptedPass = TestDataService.getValue("password");
+        String email = CryptoUtil.decryptValue(decryptedEmail);
+        String pass = CryptoUtil.decryptValue(decryptedPass);
 
         AccountPageBase accountPage = loginService.login(email, pass);
         Assert.assertTrue(accountPage.isPageOpened(), "Account page is not opened");
