@@ -18,8 +18,9 @@ public class LoginTest extends AbstractTest {
 
     @Test
     public void loginTest() {
-        String email = TestDataService.getValue("email");
-        String pass = TestDataService.getValue("password");
+        String email = TestDataService.getEncryptedValue("email");
+        String pass = TestDataService.getEncryptedValue("password");
+
         AccountPageBase accountPage = loginService.login(email, pass);
         Assert.assertTrue(accountPage.isPageOpened(), "Account page is not opened");
     }
