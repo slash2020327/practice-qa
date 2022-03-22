@@ -48,10 +48,9 @@ public class TestDataService {
         return value;
     }
 
-    public static TestDataService createInstance() {
+    public static void createInstance() {
         if (instance == null) {
             instance = new TestDataService();
         }
-        return instance;
     }
 }
