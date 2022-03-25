@@ -4,9 +4,7 @@ import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.solvd.practiceqa.web.components.desktop.Header;
-import com.solvd.practiceqa.web.pages.CartPageBase;
 import com.solvd.practiceqa.web.pages.ProductPageBase;
-import com.solvd.practiceqa.web.pages.android.AndroidCartPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
