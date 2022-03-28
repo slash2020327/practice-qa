@@ -4,10 +4,13 @@ import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.solvd.practiceqa.web.components.desktop.Header;
+import com.solvd.practiceqa.web.components.desktop.ProductItem;
 import com.solvd.practiceqa.web.pages.SearchPageBase;
 import com.solvd.practiceqa.web.service.TestDataService;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,11 +27,14 @@ public class SearchPage extends SearchPageBase {
     @FindBy(xpath = "//div[contains(@class,'sortby')]//div[contains(@class,'options')]//button")
     private List<ExtendedWebElement> sortingOptions;
 
-        @FindBy(xpath = "//div[contains(@class,'grid-item')]//div[contains(@class, 'price')]/div[1]")
+    @FindBy(xpath = "//div[contains(@class,'grid-item')]//div[contains(@class, 'price')]/div[1]")
     private List<ExtendedWebElement> productPrice;
 
     @FindBy(xpath = "//p[contains(@class,'product-card') and contains(@class,'title')]")
     private List<ExtendedWebElement> productTitles;
+
+    @FindBy(xpath = "//div[contains(@class,'grid-item')]")
+    private List<ProductItem> productItems;
 
     public SearchPage(WebDriver driver) {
         super(driver);
@@ -75,6 +81,18 @@ public class SearchPage extends SearchPageBase {
     @Override
     public SearchPage searchInput(String text) {
         header.inputSearchText(text);
+        waitUntil(ExpectedConditions.visibilityOfAllElements(), 10);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
         return this;
+    }
+
+    @Override
+    public ProductPage clickProductByTitle(String title) {
+        productItems.stream()
+                .filter(productItem -> productItem.getTitleText().contains(title))
+                .findFirst()
+                .get().clickProduct();
+        return new ProductPage(getDriver());
     }
 }

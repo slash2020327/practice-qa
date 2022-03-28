@@ -3,6 +3,7 @@ package com.solvd.practiceqa.web.components.desktop;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.solvd.practiceqa.web.components.HeaderBase;
 import com.solvd.practiceqa.web.pages.desktop.SearchPage;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -25,6 +26,7 @@ public class Header extends HeaderBase {
     @Override
     public SearchPage inputSearchText(String text) {
         searchField.type(text);
+        searchField.sendKeys(Keys.ENTER);
         return new SearchPage(getDriver());
     }
 

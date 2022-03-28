@@ -20,4 +20,6 @@ public abstract class SearchPageBase extends AbstractPage {
     public abstract List<String> getResultTitles();
 
     public abstract SearchPageBase searchInput(String text);
+
+    public abstract ProductPageBase clickProductByTitle(String title);
 }
