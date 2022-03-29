@@ -1,8 +1,9 @@
 package com.solvd.practiceqa.web.pages.desktop;
 
-import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.utils.Configuration;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.annotations.Localized;
 import com.solvd.practiceqa.web.components.desktop.Header;
 import com.solvd.practiceqa.web.pages.LoginPageBase;
 import org.openqa.selenium.WebDriver;
@@ -14,18 +15,23 @@ public class LoginPage extends LoginPageBase {
     @FindBy(xpath = "//div[contains(@class, 'header-bottom')]")
     protected Header header;
 
+    @Localized
+    @FindBy(xpath = "//div[2]/div[1]/h3")
+    protected ExtendedWebElement title;
+
     @FindBy(xpath = "//input[@id='login-email']")
     private ExtendedWebElement emailField;
 
     @FindBy(xpath = "//input[@id='login-password']")
     private ExtendedWebElement passwordField;
 
-    @FindBy(xpath = "//button[@type='submit']")
+    @Localized
+    @FindBy(xpath = "//button[@type='submit']/span")
     private ExtendedWebElement loginButton;
 
     public LoginPage(WebDriver driver) {
         super(driver);
-        setPageAbsoluteURL(R.CONFIG.get("base_url") + "/account-login");
+        setPageAbsoluteURL(Configuration.getEnvArg("base_url") + "/account-login");
     }
 
     @Override
