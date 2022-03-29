@@ -42,12 +42,12 @@ public class Main {
             Double firstPrice = JsonPath.<Double>read(jsonFile, "$.store.book[0].price");
             LOGGER.info(firstPrice.toString());
 
-            Buying store = Buying.createStore();
-            mapper.writeValue(outputJson, store);
-            LOGGER.info("Store to json parsed");
-
             Buying jsonStore = mapper.readValue(jsonFile, Buying.class);
             LOGGER.info("Json to store parsed");
+
+            mapper.writeValue(outputJson, jsonStore);
+            LOGGER.info("Store to json parsed");
+
         } catch (IOException e) {
             LOGGER.warn("Unable to parse data");
         }
