@@ -36,6 +36,7 @@ public class LoginPage extends LoginPageBase {
 
     @Override
     public LoginPage typeEmail(String email) {
+        title.hover();
         emailField.type(email);
         return this;
     }

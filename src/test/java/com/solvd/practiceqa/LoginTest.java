@@ -24,9 +24,10 @@ public class LoginTest extends AbstractTest {
         String decryptedPass = TestDataService.getValue("password");
         String email = CryptoUtil.decryptValue(decryptedEmail);
         String pass = CryptoUtil.decryptValue(decryptedPass);
-        L10N.assertAll();
 
         AccountPageBase accountPage = loginService.login(email, pass);
+        L10N.flush();
+        L10N.assertAll();
         Assert.assertTrue(accountPage.isPageOpened(), "Account page is not opened");
     }
 }

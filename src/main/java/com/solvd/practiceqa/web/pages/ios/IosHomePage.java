@@ -1,5 +1,6 @@
 package com.solvd.practiceqa.web.pages.ios;
 
+import com.qaprosoft.carina.core.foundation.utils.Configuration;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.solvd.practiceqa.web.components.ios.IosFooter;
 import com.solvd.practiceqa.web.components.ios.IosHeader;
@@ -18,5 +19,6 @@ public class IosHomePage extends HomePageBase {
 
     public IosHomePage(WebDriver driver) {
         super(driver);
+        setPageAbsoluteURL(Configuration.getEnvArg("base_url"));
     }
 }
