@@ -1,7 +1,9 @@
 package com.solvd.practiceqa.jsontraining;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.Filter;
 import com.jayway.jsonpath.JsonPath;
+import com.solvd.practiceqa.jsontraining.store.Buying;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +21,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        ObjectMapper mapper = new ObjectMapper();
         File jsonFile = new File("src/main/resources/store.json");
+        File outputJson = new File("src/main/resources/output.json");
         Filter priceFilter = filter(where("price").gt(10));
 
         try {
@@ -38,8 +42,15 @@ public class Main {
             Double firstPrice = JsonPath.<Double>read(jsonFile, "$.store.book[0].price");
             LOGGER.info(firstPrice.toString());
 
+            Buying jsonStore = mapper.readValue(jsonFile, Buying.class);
+            LOGGER.info("Json to store parsed");
+
+            mapper.writeValue(outputJson, jsonStore);
+            LOGGER.info("Store to json parsed");
+
         } catch (IOException e) {
-            LOGGER.warn("Unable to parse json file");
+            LOGGER.warn("Unable to parse data");
         }
+
     }
 }
