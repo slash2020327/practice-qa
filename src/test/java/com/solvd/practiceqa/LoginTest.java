@@ -1,5 +1,6 @@
 package com.solvd.practiceqa;
 
+import com.qaprosoft.carina.core.foundation.utils.resources.L10N;
 import com.solvd.practiceqa.util.CryptoUtil;
 import com.solvd.practiceqa.web.pages.AccountPageBase;
 import com.solvd.practiceqa.web.service.LoginService;
@@ -25,6 +26,8 @@ public class LoginTest extends AbstractTest {
         String pass = CryptoUtil.decryptValue(decryptedPass);
 
         AccountPageBase accountPage = loginService.login(email, pass);
+        L10N.flush();
+        L10N.assertAll();
         Assert.assertTrue(accountPage.isPageOpened(), "Account page is not opened");
     }
 }

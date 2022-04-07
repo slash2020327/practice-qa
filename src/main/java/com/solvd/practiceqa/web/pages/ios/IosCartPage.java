@@ -1,6 +1,6 @@
 package com.solvd.practiceqa.web.pages.ios;
 
-import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.utils.Configuration;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.solvd.practiceqa.web.components.ios.IosCartProduct;
@@ -29,7 +29,7 @@ public class IosCartPage extends CartPageBase {
 
     public IosCartPage(WebDriver driver) {
         super(driver);
-        setPageAbsoluteURL(R.CONFIG.get("base_url") + "/cart");
+        setPageAbsoluteURL(Configuration.getEnvArg("base_url") + "/cart");
     }
 
     @Override

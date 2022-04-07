@@ -1,6 +1,6 @@
 package com.solvd.practiceqa.web.pages.ios;
 
-import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.utils.Configuration;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.solvd.practiceqa.web.components.ios.IosHeader;
@@ -24,6 +24,6 @@ public class IosAccountPage extends AccountPageBase {
 
     public IosAccountPage(WebDriver driver) {
         super(driver);
-        setPageAbsoluteURL(R.CONFIG.get("base_url") + "/my-account");
+        setPageAbsoluteURL(Configuration.getEnvArg("base_url") + "/my-account");
     }
 }

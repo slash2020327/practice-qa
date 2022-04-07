@@ -1,5 +1,6 @@
 package com.solvd.practiceqa.web.pages.android;
 
+import com.qaprosoft.carina.core.foundation.utils.Configuration;
 import com.solvd.practiceqa.web.components.android.AndroidFooter;
 import com.solvd.practiceqa.web.components.android.AndroidHeader;
 import com.solvd.practiceqa.web.pages.HomePageBase;
@@ -16,5 +17,6 @@ public class AndroidHomePage extends HomePageBase {
 
     public AndroidHomePage(WebDriver driver) {
         super(driver);
+        setPageAbsoluteURL(Configuration.getEnvArg("base_url"));
     }
 }

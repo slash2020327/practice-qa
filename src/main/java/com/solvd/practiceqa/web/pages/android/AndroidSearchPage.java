@@ -1,6 +1,6 @@
 package com.solvd.practiceqa.web.pages.android;
 
-import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.utils.Configuration;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.solvd.practiceqa.web.components.android.AndroidHeader;
@@ -39,7 +39,7 @@ public class AndroidSearchPage extends SearchPageBase {
 
     public AndroidSearchPage(WebDriver driver) {
         super(driver);
-        setPageAbsoluteURL(R.CONFIG.get("base_url") + "/women-new_arrivals");
+        setPageAbsoluteURL(Configuration.getEnvArg("base_url") + "/women-new_arrivals");
     }
 
     @Override
